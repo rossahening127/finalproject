@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <title>Dashboard Template for Bootstrap</title>
+        <link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/dist/font-awesome/css/font-awesome.min.css}"/>
+        <link th:href="@{/dist/css/dashboard.css}" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"
+
+
+    </head>
+    <body>
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap"> 
+                    <a class="nav-link" href="#">Sign out</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="religion.html">
+                                    <span data-feather="home"></span>
+                                    Dashboard <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="data.html">
+                                    <span data-feather="file"></span>
+                                    Data
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Data</h1>
+                        <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#addData"><i class="fa fa-edit"></i>
+                            Add Data</button>
+
+                    </div>
+
+
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead border="1">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+<!--                                <th>Last Name</th>-->
+<!--                                <th>Email</th>
+                                <th>Date of Birth</th>
+                                <th>Hire Date</th>
+                                <th>Password</th>
+                                <th>Job ID</th>
+                                <th>Address ID</th>
+                                <th>Religion ID</th>
+                                <th>Manager ID</th>-->
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr th:each="data:${dataReli}">  
+                                <!--            dataActor nama dari main controller, isian dataactor dari actor.java-->
+
+                                <td id="id" th:text="${data.id}"></td>
+                                <td id="name" th:text="${data.name}"></td>
+<!--                                <td id="last_Name" th:text="${data.lastName}"></td>
+                                <td id="email" th:text="${data.email}"></td>
+                                <td id="dob" th:text="${data.dateOfBirth}"></td>
+                                <td id="hireDate" th:text="${data.hireDate}"></td>
+                                <td id="PW" th:text="${data.password}"></td>
+                                <td id="JobID" th:text="${data.job_id}"></td>
+                                <td id="AddID" th:text="${data.address_id}"></td>
+                                <td id="ReliID" th:text="${data.religion_id}"></td>
+                                <td id="ManID" th:text="${data.manager_id}"></td>-->
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#edit"><i class="fa fa-edit"></i>
+                                        Edit</button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i>
+                                        Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+
+        <div class="update-form">
+            <form th:action="@{/update/id}" method="post">
+                <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Religion ID</label>
+                                    <input type="text" class="form-control" id="id_r" name="id" placeholder="Religion Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Name</label>
+                                    <input type="text" class="form-control" id="name_r" name="name" placeholder="Name">
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="input-form">
+            <form th:action="@{/addData}" method="post">
+                <div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Religion ID</label>
+                                    <input type="text" class="form-control" id="id" name="id" placeholder="Religion Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="delete-form">
+            <form th:action="@{/delete}" method="get">
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <input type="hidden" class="form-control" id="id_d" name="id" placeholder="Province Identity" readonly>
+                                    <input type="hidden" class="form-control" id="name_d" name="name" placeholder="Province Name">
+                                    <input type="hidden" class="form-control" id="isDelete" value="true" name="isDelete" placeholder="Delete">
+                                    Anda yakin ingin mengahpus data ini?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Delete" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <script th:src="@{/dist/js/popper.min.js}"></script>
+        <script th:src="@{/dist/js/bootstrap.min.js}"></script>
+
+        <!-- Icons -->
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $("#edit").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+
+                    var _religionId = _row.find("#id").text(); //yg di tabel
+                    var _religionName = _row.find("#name").text();
+                 
+
+                    $(this).find("#id_r").val(_religionId); //yg di modal, id
+                    $(this).find("#name_r").val(_religionName);
+                   
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#delete-religion").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+
+                    var _religionId = _row.find("#id").text();
+                    var _religionName = _row.find("#name").text();
+
+                    $(this).find("#id_d").val(_religionId);
+                    $(this).find("#name_d").val(_religionName);
+
+//                    alert($(this).find("#actor_Id").text());
+//                    alert($(this).find("#first_Name").text());
+
+                })
+            })
+        </script>
+    </body>
+</html>
