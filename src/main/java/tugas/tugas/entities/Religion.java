@@ -56,9 +56,9 @@ public class Religion implements Serializable {
     public Religion() {
     }
 
-//    public Religion(String id) {
-//        this.id = id;
-//    }
+    public Religion(String id) {
+        this.id = id;
+    }
     
 //    public Religion(String id, String name) {
 //        this.id = id;
@@ -66,9 +66,9 @@ public class Religion implements Serializable {
 //    }
     
     
-    public Religion(String name) {
-        this.name = name;
-    }
+//    public Religion(String name) {
+//        this.name = name;
+//    }
     
 
     public Religion(String id, String isdelete) {
