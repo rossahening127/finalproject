@@ -22,10 +22,16 @@ public interface ReligionRepository extends CrudRepository<Religion, String> {
             nativeQuery = true )
     List<Religion> getAll();
     
-    @Modifying
-    @Query(
-    value= "UPDATE `religion` SET `isdelete` = 'true' WHERE `religion`.`id` = '?'", 
-            nativeQuery = true)
+//    @Modifying
+//    @Query(
+//    value= "UPDATE `religion` SET `isdelete` = 'true' WHERE `religion`.`id` = '?'", 
+//            nativeQuery = true)
+//    
+//    
+//    public String softDelete(String id);
+    
+            
+    //bikin query fungsi soft delete, mengganti value isdelete dari false menjadi true"
     //int updateIsDelete(@Param ("isDelete") enum isDelete);
            // update RssFeedEntry feedEntry set religion.isDelete =:isDelete where feedEntry.id =:entryId
     //String updateIsDelete(@Param("id") String id, @Param("isDelete") String isDelete);
@@ -35,9 +41,4 @@ public interface ReligionRepository extends CrudRepository<Religion, String> {
 //    public void softDelete(String id) {
 //	roleRepository.softDelete(id);
 //    }
-    
-    public String softDelete(String id);
-    
-            
-    //bikin query fungsi soft delete, mengganti value isdelete dari false menjadi true"
 }

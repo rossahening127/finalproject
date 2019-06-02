@@ -42,9 +42,9 @@ public class ReligionService {
 //    }
     
     
-	public String softDelete(String id) {
-		return rs.softDelete(id);
-	}
+//	public String softDelete(String id) {
+//		return rs.softDelete(id);
+//	}
             
 
 }

@@ -89,14 +89,17 @@ public class MainController {
 //    }
 
     @PostMapping("/addData")
-    public String addData(@Valid Religion religion) {
+    public String addData(Religion religion) {
+        religion.setIsdelete("false");
         religionRepository.save(religion);
+        
 //        model.addAttribute("dataReli", religionService.findAllReligion());
         return "redirect:/religion";
     }
     
     @PostMapping("/update/{id}")
-    public String upadateData(@PathVariable("id") String id, @Valid Religion religion, Model model) {
+    public String upadateData(@PathVariable("id") String id, @Valid Religion religion) {
+        religion.setIsdelete("false");
         religionRepository.save(religion);
        
         return "redirect:/religion";
@@ -107,9 +110,17 @@ public class MainController {
 //        religionRepository.updateIsDelete("", "");
 //        return "religion";
 //    }
-    @GetMapping("/delete")
-    public String softDelete(@PathVariable("id") String id){
-        religionRepository.softDelete(id);
+//    @GetMapping("/delete/{id}")
+//    public String softDelete(@PathVariable("id") String id){
+//        religionRepository.softDelete(id);
+//        return "religion";
+//    }
+    
+    @GetMapping("/delete/{id}")
+    public String softDelete(@PathVariable("id") String id, Religion religion){
+        religion.setIsdelete("true");
+//        religion.setName("");
+        religionRepository.save(religion);
         return "religion";
     }
             
