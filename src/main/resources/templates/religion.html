@@ -90,7 +90,7 @@
                                 <td>
                                     <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#edit"><i class="fa fa-edit"></i>
                                         Edit</button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#softdelete"><i class="fa fa-trash"></i>
                                         Delete</button>
                                 </td>
                             </tr>
@@ -169,8 +169,8 @@
         </div>
 
         <div class="delete-form">
-            <form th:action="@{/delete}" method="get">
-                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form th:action="@{/softdelete/id}" method="get">
+                <div class="modal fade" id="softdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -182,8 +182,8 @@
                             <div class="modal-body">
                                     <input type="hidden" class="form-control" id="id_d" name="id" placeholder="Province Identity" readonly>
                                     <input type="hidden" class="form-control" id="name_d" name="name" placeholder="Province Name">
-                                    <input type="hidden" class="form-control" id="isDelete" value="true" name="isDelete" placeholder="Delete">
-                                    Anda yakin ingin mengahpus data ini?
+                                    <!--<input type="hidden" class="form-control" id="isDelete" value="true" name="isDelete" placeholder="Delete">-->
+                                    Anda yakin ingin menghapus data ini?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -234,7 +234,7 @@
         </script>
         <script>
             $(document).ready(function () {
-                $("#delete-religion").on('show.bs.modal', function (e) {
+                $("#softdelete").on('show.bs.modal', function (e) {
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
 

@@ -22,13 +22,14 @@ public interface ReligionRepository extends CrudRepository<Religion, String> {
             nativeQuery = true )
     List<Religion> getAll();
     
-//    @Modifying
-//    @Query(
-//    value= "UPDATE `religion` SET `isdelete` = 'true' WHERE `religion`.`id` = '?'", 
-//            nativeQuery = true)
-//    
-//    
+    @Modifying
+    @Query(
+    value= "UPDATE `religion` SET `isdelete` = 'true' WHERE `religion`.`id` = '?'", 
+            nativeQuery = true)
+    
+    
 //    public String softDelete(String id);
+    public String softDelete(Religion religion);
     
             
     //bikin query fungsi soft delete, mengganti value isdelete dari false menjadi true"

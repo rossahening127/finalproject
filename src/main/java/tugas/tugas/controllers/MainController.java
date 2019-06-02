@@ -54,40 +54,6 @@ public class MainController {
     }
     
     
-//     @GetMapping("/delete/{id}")
-//    public String deleteData(@PathVariable("id") Short id, Model model) {
-////        Short ids = id;
-////        int idActor = ids.intValue();
-//        Actor actor = actorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-//        actorRepository.delete(actor);
-//        model.addAttribute("dataActor", actorRepository.findAll());
-//        return "index";
-//    }
-
-//    @PostMapping("/update/{id}")
-//    public String upadateData(@PathVariable("id") Short id, @Valid Actor actor, Model model) {
-//        actorRepository.save(actor);
-//        model.addAttribute("dataActor", filmActorService.findAllActor());
-//        return "index";
-//    }
-
-//    @RequestMapping("/update/{id}")
-//    public String upadateData(@PathVariable("id") Short id, @Valid Actor actor, Model model) {
-//        actorRepository.save(actor);
-//        model.addAttribute("dataActor", filmActorService.findAllActor());
-//        return "index";
-//    }
-    
-//    @GetMapping("/edit/{id}")
-//    public String showUpdateForm(@PathVariable("id") Short id, Model model) {
-//// int ids = id;
-////        Short ids = id;
-////        int idActor = ids.intValue();
-//        Actor actor = actorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid User Id" + id));
-//        model.addAttribute("actor", actor);
-//        return "updateActor";
-//    }
-
     @PostMapping("/addData")
     public String addData(Religion religion) {
         religion.setIsdelete("false");
@@ -98,11 +64,26 @@ public class MainController {
     }
     
     @PostMapping("/update/{id}")
-    public String upadateData(@PathVariable("id") String id, @Valid Religion religion) {
+    public String updateData(@PathVariable("id") String id, @Valid Religion religion) {
         religion.setIsdelete("false");
         religionRepository.save(religion);
        
         return "redirect:/religion";
+    }
+    
+    @GetMapping("/softdelete/{id}")
+    public String softDelete(@PathVariable("id") String id, Religion religion){
+        religion.setIsdelete("true");
+        //religion.setName("");
+        //religion.setId(id);
+        religionRepository.save(religion);
+        return "redirect:/religion";
+    }
+            
+    
+    @GetMapping("/*")
+    public String Error(){
+        return "error";
     }
     
 //    @GetMapping("/delete")
@@ -116,17 +97,5 @@ public class MainController {
 //        return "religion";
 //    }
     
-    @GetMapping("/delete/{id}")
-    public String softDelete(@PathVariable("id") String id, Religion religion){
-        religion.setIsdelete("true");
-//        religion.setName("");
-        religionRepository.save(religion);
-        return "religion";
-    }
-            
     
-    @GetMapping("/*")
-    public String Error(){
-        return "error";
-    }
 }
