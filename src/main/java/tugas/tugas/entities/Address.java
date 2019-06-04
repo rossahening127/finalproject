@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
     , @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id")
-    , @NamedQuery(name = "Address.findByName", query = "SELECT a FROM Address a WHERE a.name = :name")})
+    , @NamedQuery(name = "Address.findByName", query = "SELECT a FROM Address a WHERE a.name = :name")
+    , @NamedQuery(name = "Address.findByIsdelete", query = "SELECT a FROM Address a WHERE a.isdelete = :isdelete")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +48,11 @@ public class Address implements Serializable {
     @Size(max = 30)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "isdelete")
+    private String isdelete;
     @JoinColumn(name = "subdistrict_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Subdistrict subdistrictId;
@@ -59,11 +66,10 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public Address(String name) {
-        this.name = name;
+    public Address(Integer id, String isdelete) {
+        this.id = id;
+        this.isdelete = isdelete;
     }
-    
-    
 
     public Integer getId() {
         return id;
@@ -79,6 +85,14 @@ public class Address implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
     }
 
     public Subdistrict getSubdistrictId() {

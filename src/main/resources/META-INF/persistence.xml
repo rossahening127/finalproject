@@ -9,6 +9,9 @@
     <class>tugas.tugas.entities.Religion</class>
     <class>tugas.tugas.entities.Province</class>
     <class>tugas.tugas.entities.Subdistrict</class>
+    <class>tugas.tugas.entities.AccessOfEmp</class>
+    <class>tugas.tugas.entities.AccessEmp</class>
+    <class>tugas.tugas.entities.Department</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sim?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

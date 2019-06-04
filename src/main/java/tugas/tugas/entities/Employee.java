@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
     , @NamedQuery(name = "Employee.findByDateOfBirth", query = "SELECT e FROM Employee e WHERE e.dateOfBirth = :dateOfBirth")
     , @NamedQuery(name = "Employee.findByHireDate", query = "SELECT e FROM Employee e WHERE e.hireDate = :hireDate")
-    , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")})
+    , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")
+    , @NamedQuery(name = "Employee.findByIsdelete", query = "SELECT e FROM Employee e WHERE e.isdelete = :isdelete")})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,6 +77,15 @@ public class Employee implements Serializable {
     @Size(max = 20)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "isdelete")
+    private String isdelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId", fetch = FetchType.LAZY)
+    private List<AccessOfEmp> accessOfEmpList;
+    @OneToMany(mappedBy = "managerId", fetch = FetchType.LAZY)
+    private List<Department> departmentList;
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Address addressId;
@@ -97,10 +108,11 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Employee(Integer id, String lastName, String email) {
+    public Employee(Integer id, String lastName, String email, String isdelete) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;
+        this.isdelete = isdelete;
     }
 
     public Integer getId() {
@@ -157,6 +169,32 @@ public class Employee implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
+    }
+
+    @XmlTransient
+    public List<AccessOfEmp> getAccessOfEmpList() {
+        return accessOfEmpList;
+    }
+
+    public void setAccessOfEmpList(List<AccessOfEmp> accessOfEmpList) {
+        this.accessOfEmpList = accessOfEmpList;
+    }
+
+    @XmlTransient
+    public List<Department> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
     }
 
     public Address getAddressId() {

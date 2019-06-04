@@ -5,8 +5,11 @@
  */
 package tugas.tugas.repositories;
 
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import tugas.tugas.entities.Job;
+import tugas.tugas.entities.Religion;
 
 
 /**
@@ -14,5 +17,8 @@ import tugas.tugas.entities.Job;
  * @author RossaHening
  */
 public interface JobRepository extends CrudRepository<Job, String> {
-    
+    @Query(
+    value="Select * from job r where r.isdelete =\'false\'",
+            nativeQuery = true )
+    List<Religion> getAll();
 }

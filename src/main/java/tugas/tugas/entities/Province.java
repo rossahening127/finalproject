@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Province.findAll", query = "SELECT p FROM Province p")
     , @NamedQuery(name = "Province.findById", query = "SELECT p FROM Province p WHERE p.id = :id")
-    , @NamedQuery(name = "Province.findByName", query = "SELECT p FROM Province p WHERE p.name = :name")})
+    , @NamedQuery(name = "Province.findByName", query = "SELECT p FROM Province p WHERE p.name = :name")
+    , @NamedQuery(name = "Province.findByIsdelete", query = "SELECT p FROM Province p WHERE p.isdelete = :isdelete")})
 public class Province implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +45,11 @@ public class Province implements Serializable {
     @Size(max = 50)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "isdelete")
+    private String isdelete;
     @OneToMany(mappedBy = "provinceId", fetch = FetchType.LAZY)
     private List<District> districtList;
 
@@ -52,6 +58,11 @@ public class Province implements Serializable {
 
     public Province(String id) {
         this.id = id;
+    }
+
+    public Province(String id, String isdelete) {
+        this.id = id;
+        this.isdelete = isdelete;
     }
 
     public String getId() {
@@ -68,6 +79,14 @@ public class Province implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
     }
 
     @XmlTransient

@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "District.findAll", query = "SELECT d FROM District d")
     , @NamedQuery(name = "District.findById", query = "SELECT d FROM District d WHERE d.id = :id")
-    , @NamedQuery(name = "District.findByName", query = "SELECT d FROM District d WHERE d.name = :name")})
+    , @NamedQuery(name = "District.findByName", query = "SELECT d FROM District d WHERE d.name = :name")
+    , @NamedQuery(name = "District.findByIsdelete", query = "SELECT d FROM District d WHERE d.isdelete = :isdelete")})
 public class District implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +47,11 @@ public class District implements Serializable {
     @Size(max = 50)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "isdelete")
+    private String isdelete;
     @OneToMany(mappedBy = "districtId", fetch = FetchType.LAZY)
     private List<Subdistrict> subdistrictList;
     @JoinColumn(name = "province_id", referencedColumnName = "id")
@@ -59,14 +65,11 @@ public class District implements Serializable {
         this.id = id;
     }
 
-    public District(String id, String name) {
+    public District(String id, String isdelete) {
         this.id = id;
-        this.name = name;
+        this.isdelete = isdelete;
     }
-    
-    
 
-    
     public String getId() {
         return id;
     }
@@ -81,6 +84,14 @@ public class District implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
     }
 
     @XmlTransient
