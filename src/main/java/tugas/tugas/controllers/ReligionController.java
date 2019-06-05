@@ -34,14 +34,13 @@ public class ReligionController {
         model.addAttribute("dataReli", religionRepository.getAll());
         return "religion";
     }
-//    @GetMapping("/coba")
-//    public String coba(Model model) {
-//        model.addAttribute("dataReli", religionRepository.getAll());
-//        return "coba";
+
+//    @GetMapping("/dashboard")
+//    public String dashboard(Model model) {
+//
+//        return "dashboard";
 //    }
-   
-  
-    
+
     @PostMapping("/religion/addData")
     public String addData(Religion religion) {
         religion.setIsdelete("false");
@@ -65,8 +64,5 @@ public class ReligionController {
         religionRepository.save(religion);
         return "redirect:/religion";
     }
-    
-   
-  
 
 }

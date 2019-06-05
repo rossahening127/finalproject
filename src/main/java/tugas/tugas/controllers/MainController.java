@@ -21,28 +21,19 @@ import tugas.tugas.services.ReligionService;
  */
 public class MainController {
     
-    @Autowired
-    private ReligionRepository religionRepository;
-
-    @Autowired
-    private ReligionService religionService;
-
+   
     @GetMapping("/")
     public String index() {
         return "index";
     }
-
-    @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-        model.addAttribute("dataReli", religionRepository.getAll());
-        
-        return "dashboard";
-    }
+    
 
     @GetMapping("/*")
     public String Error() {
         return "error";
     }
+    
+    
     
     
 
