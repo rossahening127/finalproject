@@ -5,8 +5,11 @@
  */
 package tugas.tugas.repositories;
 
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import tugas.tugas.entities.Address;
+
 
 
 /**
@@ -14,5 +17,8 @@ import tugas.tugas.entities.Address;
  * @author RossaHening
  */
 public interface AddressRepository extends CrudRepository<Address, Integer> {
-    
+     @Query(
+    value="Select * from address a where a.isdelete =\'false\'",
+            nativeQuery = true )
+    List<Address> getAll();
 }

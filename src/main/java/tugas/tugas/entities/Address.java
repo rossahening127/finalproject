@@ -6,7 +6,6 @@
 package tugas.tugas.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,15 +46,13 @@ public class Address implements Serializable {
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+//    @NotNull
+    @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @JoinColumn(name = "subdistrict_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Subdistrict subdistrictId;
-    @OneToMany(mappedBy = "addressId", fetch = FetchType.LAZY)
-    private List<Employee> employeeList;
+    @JoinColumn(name = "subdistrictid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Subdistrict subdistrictid;
 
     public Address() {
     }
@@ -95,21 +90,12 @@ public class Address implements Serializable {
         this.isdelete = isdelete;
     }
 
-    public Subdistrict getSubdistrictId() {
-        return subdistrictId;
+    public Subdistrict getSubdistrictid() {
+        return subdistrictid;
     }
 
-    public void setSubdistrictId(Subdistrict subdistrictId) {
-        this.subdistrictId = subdistrictId;
-    }
-
-    @XmlTransient
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setSubdistrictid(Subdistrict subdistrictid) {
+        this.subdistrictid = subdistrictid;
     }
 
     @Override

@@ -28,10 +28,10 @@ public class MainController {
     }
     
 
-    @GetMapping("/*")
-    public String Error() {
-        return "error";
-    }
+//    @GetMapping("/*")
+//    public String Error() {
+//        return "error";
+//    }
     
     
     

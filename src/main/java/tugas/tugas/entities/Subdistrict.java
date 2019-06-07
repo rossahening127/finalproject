@@ -8,6 +8,7 @@ package tugas.tugas.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,15 +49,15 @@ public class Subdistrict implements Serializable {
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+//    @NotNull
+    @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @OneToMany(mappedBy = "subdistrictId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subdistrictid", fetch = FetchType.LAZY)
     private List<Address> addressList;
-    @JoinColumn(name = "district_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private District districtId;
+    @JoinColumn(name = "districtid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private District districtid;
 
     public Subdistrict() {
     }
@@ -103,12 +104,12 @@ public class Subdistrict implements Serializable {
         this.addressList = addressList;
     }
 
-    public District getDistrictId() {
-        return districtId;
+    public District getDistrictid() {
+        return districtid;
     }
 
-    public void setDistrictId(District districtId) {
-        this.districtId = districtId;
+    public void setDistrictid(District districtid) {
+        this.districtid = districtid;
     }
 
     @Override

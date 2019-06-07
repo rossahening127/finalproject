@@ -5,8 +5,13 @@
  */
 package tugas.tugas.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tugas.tugas.entities.Religion;
+import tugas.tugas.entities.Subdistrict;
+import tugas.tugas.repositories.ReligionRepository;
+import tugas.tugas.repositories.SubdistrictRepository;
 
 /**
  *
@@ -16,8 +21,15 @@ import org.springframework.stereotype.Service;
 public class SubdistrictService {
       
     @Autowired
-    private SubdistrictService ss;
+    private SubdistrictRepository sr;
     
+    public Iterable<Subdistrict> findAllSub() { //fungsi findAllActor ntar bisa dipanggil
+        return sr.findAll();
+    }
+
+    public List<Subdistrict> getAll() {
+        return sr.getAll();
+    }
     
     
 }

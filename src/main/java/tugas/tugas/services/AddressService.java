@@ -5,8 +5,11 @@
  */
 package tugas.tugas.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tugas.tugas.entities.Address;
+import tugas.tugas.repositories.AddressRepository;
 
 /**
  *
@@ -16,8 +19,15 @@ import org.springframework.stereotype.Service;
 public class AddressService {
       
     @Autowired
-    private AddressService as;
+    private AddressRepository ar;
     
     
+    public Iterable<Address> findAllAdd() { //fungsi findAllActor ntar bisa dipanggil
+        return ar.findAll();
+    }
+
+    public List<Address> getAll() {
+        return ar.getAll();
+    }
     
 }

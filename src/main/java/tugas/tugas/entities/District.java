@@ -6,7 +6,9 @@
 package tugas.tugas.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -45,14 +49,16 @@ public class District implements Serializable {
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @JoinColumn(name = "province_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Province provinceId;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "districtid", fetch = FetchType.LAZY)
+    private List<Subdistrict> subdistrictList;
+    @JoinColumn(name = "provinceid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Province provinceid;
+//coba ya cak 
     public District() {
     }
 
@@ -89,12 +95,21 @@ public class District implements Serializable {
         this.isdelete = isdelete;
     }
 
-    public Province getProvinceId() {
-        return provinceId;
+    @XmlTransient
+    public List<Subdistrict> getSubdistrictList() {
+        return subdistrictList;
     }
 
-    public void setProvinceId(Province provinceId) {
-        this.provinceId = provinceId;
+    public void setSubdistrictList(List<Subdistrict> subdistrictList) {
+        this.subdistrictList = subdistrictList;
+    }
+
+    public Province getProvinceid() {
+        return provinceid;
+    }
+
+    public void setProvinceid(Province provinceid) {
+        this.provinceid = provinceid;
     }
 
     @Override

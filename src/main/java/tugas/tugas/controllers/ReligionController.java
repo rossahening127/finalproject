@@ -29,6 +29,7 @@ public class ReligionController {
     @Autowired
     private ReligionService religionService;
 
+    
     @GetMapping("/religion")
     public String religion(Model model) {
         model.addAttribute("dataReli", religionRepository.getAll());
