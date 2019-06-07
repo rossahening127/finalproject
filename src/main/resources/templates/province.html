@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Religion table</title>
+        <title>Province table</title>
         <meta name="description" content="Sufee Admin - HTML5 Admin Template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -174,7 +174,7 @@
                             <ol class="breadcrumb text-right">
                                 <li><a href="#">Dashboard</a></li>
                                 <li><a href="#">Tables</a></li>
-                                <li class="active">Religion table</li>
+                                <li class="active">Province table</li>
                             </ol>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Religion Table</strong>
+                                    <strong class="card-title">Province Table</strong>
                                     <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#addData" style="float: right;"><i class="fa fa-edit"></i>
                                         Add Data</button>
                                 </div>
@@ -199,11 +199,11 @@
                                                 <th>Id</th>
                                                 <th>Name</th>
 
-                                                <th>Actiona</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="data:${dataReli}">  
+                                            <tr th:each="data:${dataPro}">  
                                                 <!--            dataActor nama dari main controller, isian dataactor dari actor.java-->
 
                                                 <td id="id" th:text="${data.id}"></td>
@@ -235,7 +235,7 @@
         <!-- Modal -->
 
         <div class="update-form">
-            <form th:action="@{/religion/update/id}" method="post">
+            <form th:action="@{/province/update/id}" method="post">
                 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -247,12 +247,12 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group required">
-                                    <label for="id" class="col-form-label">Religion ID</label>
-                                    <input type="text" class="form-control" id="id_r" name="id" placeholder="Religion Identity">
+                                    <label for="id" class="col-form-label">Province ID</label>
+                                    <input type="text" class="form-control" id="id_p" name="id" placeholder="Province Identity">
                                 </div>
                                 <div class="form-group required">
                                     <label for="name" class="col-form-label">Name</label>
-                                    <input type="text" class="form-control" id="name_r" name="name" placeholder="Name">
+                                    <input type="text" class="form-control" id="name_p" name="name" placeholder="Name">
                                 </div>
 
                             </div>
@@ -267,7 +267,7 @@
         </div>
 
         <div class="input-form">
-            <form th:action="@{/religion/addData}" method="post">
+            <form th:action="@{/province/addData}" method="post">
                 <div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -279,11 +279,11 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group required">
-                                    <label for="id" class="col-form-label">Religion ID</label>
-                                    <input type="text" class="form-control" id="id" name="id" placeholder="Religion Identity">
+                                    <label for="id" class="col-form-label">Province ID</label>
+                                    <input type="text" class="form-control" id="id" name="id" placeholder="Province Identity">
                                 </div>
                                 <div class="form-group required">
-                                    <label for="name" class="col-form-label">First Name</label>
+                                    <label for="name" class="col-form-label">Province Name</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                                 </div>
 
@@ -299,7 +299,7 @@
         </div>
 
         <div class="delete-form">
-            <form th:action="@{/religion/softdelete/id}" method="get">
+            <form th:action="@{/province/softdelete/id}" method="get">
                 <div class="modal fade" id="softdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -361,12 +361,12 @@
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
 
-                    var _religionId = _row.find("#id").text(); //yg di tabel
-                    var _religionName = _row.find("#name").text();
+                    var _proId = _row.find("#id").text(); //yg di tabel
+                    var _proName = _row.find("#name").text();
 
 
-                    $(this).find("#id_r").val(_religionId); //yg di modal, id
-                    $(this).find("#name_r").val(_religionName);
+                    $(this).find("#id_p").val(_proId); //yg di modal, id
+                    $(this).find("#name_p").val(_proName);
 
                 });
             });
@@ -377,11 +377,11 @@
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
 
-                    var _religionId = _row.find("#id").text();
-                    var _religionName = _row.find("#name").text();
+                    var _proId = _row.find("#id").text();
+                    var _proName = _row.find("#name").text();
 
-                    $(this).find("#id_d").val(_religionId);
-                    $(this).find("#name_d").val(_religionName);
+                    $(this).find("#id_d").val(_proId);
+                    $(this).find("#name_d").val(_proName);
 
 
                 })

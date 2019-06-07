@@ -5,8 +5,13 @@
  */
 package tugas.tugas.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tugas.tugas.entities.Job;
+import tugas.tugas.entities.Religion;
+import tugas.tugas.repositories.JobRepository;
+import tugas.tugas.repositories.ReligionRepository;
 
 /**
  *
@@ -16,8 +21,15 @@ import org.springframework.stereotype.Service;
 public class JobService {
       
     @Autowired
-    private JobService js;
+    private JobRepository js;
     
+    public Iterable<Job> findAllJob() { //fungsi findAllActor ntar bisa dipanggil
+        return js.findAll();
+    }
+
+    public List<Job> getAll() {
+        return js.getAll();
+    }
     
     
 }

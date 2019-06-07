@@ -35,11 +35,11 @@ public class ReligionController {
         return "religion";
     }
 
-//    @GetMapping("/dashboard")
-//    public String dashboard(Model model) {
-//
-//        return "dashboard";
-//    }
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+
+        return "dashboard";
+    }
 
     @PostMapping("/religion/addData")
     public String addData(Religion religion) {

@@ -6,21 +6,16 @@
 package tugas.tugas.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
     , @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id")
-    , @NamedQuery(name = "Job.findByJobTitle", query = "SELECT j FROM Job j WHERE j.jobTitle = :jobTitle")
+    , @NamedQuery(name = "Job.findByJobtitle", query = "SELECT j FROM Job j WHERE j.jobtitle = :jobtitle")
     , @NamedQuery(name = "Job.findByIsdelete", query = "SELECT j FROM Job j WHERE j.isdelete = :isdelete")})
 public class Job implements Serializable {
 
@@ -44,15 +39,13 @@ public class Job implements Serializable {
     @Column(name = "id")
     private String id;
     @Size(max = 30)
-    @Column(name = "jobTitle")
-    private String jobTitle;
+    @Column(name = "jobtitle")
+    private String jobtitle;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+//    @NotNull
+    @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobId", fetch = FetchType.LAZY)
-    private List<Employee> employeeList;
 
     public Job() {
     }
@@ -74,12 +67,12 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public String getJobTitle() {
-        return jobTitle;
+    public String getJobtitle() {
+        return jobtitle;
     }
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
+    public void setJobtitle(String jobtitle) {
+        this.jobtitle = jobtitle;
     }
 
     public String getIsdelete() {
@@ -88,15 +81,6 @@ public class Job implements Serializable {
 
     public void setIsdelete(String isdelete) {
         this.isdelete = isdelete;
-    }
-
-    @XmlTransient
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
     }
 
     @Override

@@ -18,7 +18,7 @@ import tugas.tugas.entities.Religion;
  */
 public interface JobRepository extends CrudRepository<Job, String> {
     @Query(
-    value="Select * from job r where r.isdelete =\'false\'",
+    value="Select * from job j where j.isdelete =\'false\'",
             nativeQuery = true )
-    List<Religion> getAll();
+    List<Job> getAll();
 }
