@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Religion table</title>
+        <title>Subdistrict table</title>
         <meta name="description" content="Sufee Admin - HTML5 Admin Template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -73,10 +73,10 @@
                             <ul class="sub-menu children dropdown-menu">
                                 <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/religion}">Religion</a></li>
                                 <li><i class="fa fa-id-badge"></i><a th:href="@{/job}">Job</a></li>
-                                <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Address</a></li>
-                                <li><i class="fa fa-share-square-o"></i><a href="ui-social-buttons.html">District</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/address}">Address</a></li>
+                                <li><i class="fa fa-share-square-o"></i><a th:href="@{/district}">District</a></li>
                                 <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Employee</a></li>
-                                <li><i class="fa fa-exclamation-triangle"></i><a href="Province">Subdistrict</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a th:href="@{/subdistrict}">Subdistrict</a></li>
                                 <li><i class="fa fa-spinner"></i><a th:href="@{/province}">Province</a></li>
                                 <li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>
                                 <li><i class="fa fa-book"></i><a href="ui-switches.html">Switches</a></li>
@@ -84,8 +84,8 @@
                                 <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
                             </ul>
                         </li>
-                        
-                        
+
+
 
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -106,8 +106,8 @@
                     <div class="col-sm-7">
                         <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                         <div class="header-left">
-                            
-                            
+
+
 
                             <div class="dropdown for-notification">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -131,7 +131,7 @@
                                 </div>
                             </div> 
 
-                            
+
                         </div>
                     </div>
 
@@ -152,7 +152,7 @@
                             </div>
                         </div>
 
-                        
+
 
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                             <ol class="breadcrumb text-right">
                                 <li><a href="#">Dashboard</a></li>
                                 <li><a href="#">Tables</a></li>
-                                <li class="active">Religion table</li>
+                                <li class="active">Subdistrict Table</li>
                             </ol>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Religion Table</strong>
+                                    <strong class="card-title">Subdistrict Table</strong>
                                     <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#addData" style="float: right;"><i class="fa fa-edit"></i>
                                         Add Data</button>
                                 </div>
@@ -197,9 +197,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Name</th>
-                                                <th>District</th>
-
+                                                <th>Subdistrict Name</th>
+                                                <th>District ID</th>
+                                                <th>District Name</th>
+                                                
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -209,7 +210,9 @@
 
                                                 <td id="id" th:text="${data.id}"></td>
                                                 <td id="name" th:text="${data.name}"></td>
-                                                <td id="subdis" th:text="${data.districtid}"></td>
+                                                
+                                                <td id="disId" th:text="${data.districtid.id}"></td>
+                                                <td id="disName" th:text="${data.districtid.name}"></td>
 
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#edit"><i class="fa fa-edit"></i>
@@ -249,16 +252,16 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group required">
-                                    <label for="id" class="col-form-label">Religion ID</label>
-                                    <input type="text" class="form-control" id="id_s" name="id" placeholder="Religion Identity">
+                                    <label for="id" class="col-form-label">Subdistrict ID</label>
+                                    <input type="text" class="form-control" id="id_u" name="id" placeholder="Subdistrict Identity">
                                 </div>
                                 <div class="form-group required">
-                                    <label for="name" class="col-form-label">Name</label>
-                                    <input type="text" class="form-control" id="name_s" name="name" placeholder="Name">
+                                    <label for="name" class="col-form-label">Subdistrict Name</label>
+                                    <input type="text" class="form-control" id="name_u" name="name" placeholder="Name">
                                 </div>
                                 <div class="form-group required">
-                                    <label for="name" class="col-form-label">Name</label>
-                                    <input type="text" class="form-control" id="subdis_s" name="district" placeholder="Name">
+                                    <label for="name" class="col-form-label">District Name</label>
+                                    <input type="text" class="form-control" id="dis_u" name="districtid" placeholder="Name">
                                 </div>
 
                             </div>
@@ -285,16 +288,22 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group required">
-                                    <label for="id" class="col-form-label">Religion ID</label>
-                                    <input type="text" class="form-control" id="id" name="id" placeholder="Religion Identity">
+                                    <label for="id" class="col-form-label">Subdistrict ID</label>
+                                    <input type="text" class="form-control" id="id" name="id" placeholder="Subdistrict Identity">
                                 </div>
                                 <div class="form-group required">
-                                    <label for="name" class="col-form-label">First Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                    <label for="name" class="col-form-label">Subdistrict Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Subdistrict Name">
                                 </div>
                                 <div class="form-group required">
-                                    <label for="name" class="col-form-label">First Name</label>
-                                    <input type="text" class="form-control" id="subdis" name="dis" placeholder="Name">
+                                    <label for="name" class="col-form-label">District Name</label>
+                                    <input type="text" class="form-control" id="dis" name="districtid" placeholder="District Name">
+<!--                                    <select type="text" name="provinceid" id="id" class="form-control">
+                                        <option value="0">-PILIH-</option>
+                                        <option th:each="data:${dataPro}" th:value="${data:id}" th:text="${data.name}"></option>
+                                    </select>-->
+<!--kok ha mau ya ca combonya-->
+<!--provinceid kebacanya tetep null gmn dong wkwk-->
                                 </div>
 
                             </div>
@@ -314,15 +323,15 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" class="form-control" id="id_d" name="id" placeholder="Province Identity" readonly>
-                                <input type="hidden" class="form-control" id="name_d" name="name" placeholder="Province Name">
-                                <input type="hidden" class="form-control" id="subdis_d" name="subdis" placeholder="Province Name">
+                                <input type="hidden" class="form-control" id="id_d" name="id" placeholder="Subdistrict Identity" readonly>
+                                <input type="hidden" class="form-control" id="name_d" name="name" placeholder="Subdistrict Name">
+                                <input type="hidden" class="form-control" id="dis_d" name="districtid" placeholder="District Name">
                                 <!--<input type="hidden" class="form-control" id="isDelete" value="true" name="isDelete" placeholder="Delete">-->
                                 Anda yakin ingin menghapus data ini?
                             </div>
@@ -372,14 +381,14 @@
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
 
-                    var _religionId = _row.find("#id").text(); //yg di tabel
-                    var _religionName = _row.find("#name").text();
-                    var _disName = _row.find("#districtid").text();
+                    var _subId = _row.find("#id").text(); //yg di tabel
+                    var _subName = _row.find("#name").text();
+                    var _disId = _row.find("#disId").text();
 
 
-                    $(this).find("#id_s").val(_religionId); //yg di modal, id
-                    $(this).find("#name_s").val(_religionName);
-                    $(this).find("#subdis_s").val(_disName);
+                    $(this).find("#id_u").val(_subId); //yg di modal, id
+                    $(this).find("#name_u").val(_subName);
+                    $(this).find("#dis_u").val(_disId);
 
                 });
             });
@@ -390,13 +399,13 @@
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
 
-                    var _religionId = _row.find("#id").text();
-                    var _religionName = _row.find("#name").text();
-                    var _disName = _row.find("#districtid").text();
+                    var _subId = _row.find("#id").text();
+                    var _subName = _row.find("#name").text();
+                    var _disId = _row.find("#disId").text(); 
 
-                    $(this).find("#id_d").val(_religionId);
-                    $(this).find("#name_d").val(_religionName);
-                    $(this).find("#subdis_d").val(_disName);
+                    $(this).find("#id_d").val(_subId);
+                    $(this).find("#name_d").val(_subName);
+                    $(this).find("#dis_d").val(_disId);
 
 
                 })

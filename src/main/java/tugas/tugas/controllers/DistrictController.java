@@ -44,13 +44,7 @@ public class DistrictController { //cha udah di run belom
         return "district";
     }
     
-//     @GetMapping("/district")
-//    public String district() {        
-//        return "trying";
-//    }
-    
-
-    
+   
     @PostMapping("/district/addData")
     public String addData(District district) {
         district.setIsdelete("false");

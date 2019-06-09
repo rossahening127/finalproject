@@ -6,16 +6,20 @@
 package tugas.tugas.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,9 +47,11 @@ public class Religion implements Serializable {
     private String name;
     @Basic(optional = false)
 //    @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
+    @OneToMany(mappedBy = "religionId", fetch = FetchType.LAZY)
+    private List<Employee> employeeList;
 
     public Religion() {
     }
@@ -81,6 +87,15 @@ public class Religion implements Serializable {
 
     public void setIsdelete(String isdelete) {
         this.isdelete = isdelete;
+    }
+
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
     @Override

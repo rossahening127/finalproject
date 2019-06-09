@@ -41,13 +41,16 @@ public class AccessOfEmp implements Serializable {
     @Column(name = "id")
     private String id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+//    @NotNull
+    @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "employeeid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Employee employeeId;
+    private Employee employeeid;
+    @JoinColumn(name = "accessid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AccessEmp accessid;
 
     public AccessOfEmp() {
     }
@@ -77,12 +80,20 @@ public class AccessOfEmp implements Serializable {
         this.isdelete = isdelete;
     }
 
-    public Employee getEmployeeId() {
-        return employeeId;
+    public Employee getEmployeeid() {
+        return employeeid;
     }
 
-    public void setEmployeeId(Employee employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployeeid(Employee employeeid) {
+        this.employeeid = employeeid;
+    }
+
+    public AccessEmp getAccessid() {
+        return accessid;
+    }
+
+    public void setAccessid(AccessEmp accessid) {
+        this.accessid = accessid;
     }
 
     @Override

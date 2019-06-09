@@ -8,17 +8,17 @@ package tugas.tugas.repositories;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import tugas.tugas.entities.Employee;
-
+import tugas.tugas.entities.AccessEmp;
+import tugas.tugas.entities.District;
 
 /**
  *
  * @author RossaHening
  */
-public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
+public interface AccessEmpRepository extends CrudRepository<AccessEmp, String>{
     @Query(
-    value="Select * from employee e where e.isdelete =\'false\'",
-            nativeQuery = true )
-    List<Employee> getAll();
+            value = "Select * from access_emp a where a.isdelete =\'false\'",
+            nativeQuery = true)
+     List<AccessEmp> getAll();
     
 }

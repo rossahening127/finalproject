@@ -5,8 +5,12 @@
  */
 package tugas.tugas.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tugas.tugas.entities.Employee;
+import tugas.tugas.entities.Subdistrict;
+import tugas.tugas.repositories.EmployeeRepository;
 
 /**
  *
@@ -16,7 +20,17 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
       
     @Autowired
-    private EmployeeService es;
+    private EmployeeRepository er;
+    
+    public Iterable<Employee> findAllEmp() { //fungsi findAllActor ntar bisa dipanggil
+        return er.findAll();
+    }
+
+    public List<Employee> getAll() {
+        return er.getAll();
+    }
+    
+    
     
     
     

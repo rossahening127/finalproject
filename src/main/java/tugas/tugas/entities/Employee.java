@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -39,11 +40,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
     , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
-    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
-    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
+    , @NamedQuery(name = "Employee.findByFirstname", query = "SELECT e FROM Employee e WHERE e.firstname = :firstname")
+    , @NamedQuery(name = "Employee.findByLastname", query = "SELECT e FROM Employee e WHERE e.lastname = :lastname")
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
-    , @NamedQuery(name = "Employee.findByDateOfBirth", query = "SELECT e FROM Employee e WHERE e.dateOfBirth = :dateOfBirth")
-    , @NamedQuery(name = "Employee.findByHireDate", query = "SELECT e FROM Employee e WHERE e.hireDate = :hireDate")
+    , @NamedQuery(name = "Employee.findByDateofbirth", query = "SELECT e FROM Employee e WHERE e.dateofbirth = :dateofbirth")
+    , @NamedQuery(name = "Employee.findByHiredate", query = "SELECT e FROM Employee e WHERE e.hiredate = :hiredate")
     , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")
     , @NamedQuery(name = "Employee.findByIsdelete", query = "SELECT e FROM Employee e WHERE e.isdelete = :isdelete")})
 public class Employee implements Serializable {
@@ -55,34 +56,36 @@ public class Employee implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 30)
-    @Column(name = "firstName")
-    private String firstName;
+    @Column(name = "firstname")
+    private String firstname;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "lastname")
+    private String lastname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
-    @Column(name = "dateOfBirth")
+    @Column(name = "dateofbirth")
+    @DateTimeFormat (pattern = "YYYY-mm-dd")
     @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
-    @Column(name = "hireDate")
+    private Date dateofbirth;
+    @Column(name = "hiredate")
+    @DateTimeFormat (pattern = "YYYY-mm-dd")
     @Temporal(TemporalType.DATE)
-    private Date hireDate;
+    private Date hiredate;
     @Size(max = 20)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+//    @NotNull
+    @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
     private List<AccessOfEmp> accessOfEmpList;
     @OneToMany(mappedBy = "managerId", fetch = FetchType.LAZY)
     private List<Department> departmentList;
@@ -100,6 +103,9 @@ public class Employee implements Serializable {
     @JoinColumn(name = "religion_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Religion religionId;
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Department departmentId;
 
     public Employee() {
     }
@@ -108,9 +114,9 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Employee(Integer id, String lastName, String email, String isdelete) {
+    public Employee(Integer id, String lastname, String email, String isdelete) {
         this.id = id;
-        this.lastName = lastName;
+        this.lastname = lastname;
         this.email = email;
         this.isdelete = isdelete;
     }
@@ -123,20 +129,20 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -147,20 +153,20 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public Date getDateofbirth() {
+        return dateofbirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDateofbirth(Date dateofbirth) {
+        this.dateofbirth = dateofbirth;
     }
 
-    public Date getHireDate() {
-        return hireDate;
+    public Date getHiredate() {
+        return hiredate;
     }
 
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+    public void setHiredate(Date hiredate) {
+        this.hiredate = hiredate;
     }
 
     public String getPassword() {
@@ -236,6 +242,14 @@ public class Employee implements Serializable {
 
     public void setReligionId(Religion religionId) {
         this.religionId = religionId;
+    }
+
+    public Department getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Department departmentId) {
+        this.departmentId = departmentId;
     }
 
     @Override

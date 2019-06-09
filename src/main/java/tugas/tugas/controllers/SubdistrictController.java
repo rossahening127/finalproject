@@ -6,23 +6,26 @@
 package tugas.tugas.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import tugas.tugas.entities.Job;
+
 import tugas.tugas.entities.Subdistrict;
-import tugas.tugas.repositories.JobRepository;
+
 import tugas.tugas.repositories.SubdistrictRepository;
-import tugas.tugas.services.JobService;
+
 import tugas.tugas.services.SubdistrictService;
 
 /**
  *
  * @author RossaHening
  */
+@Controller
 public class SubdistrictController {
-     @Autowired
+
+    @Autowired
     private SubdistrictRepository subdistrictRepository;
 
     @Autowired
@@ -34,7 +37,6 @@ public class SubdistrictController {
         return "subdistrict";
     }
 
-    
     @PostMapping("/subdistrict/addData")
     public String addData(Subdistrict subdistrict) {
         subdistrict.setIsdelete("false");

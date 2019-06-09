@@ -7,6 +7,7 @@ package tugas.tugas.controllers;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import tugas.tugas.services.ReligionService;
  *
  * @author RossaHening
  */
+@Controller
 public class MainController {
     
    
@@ -26,13 +28,14 @@ public class MainController {
     public String index() {
         return "index";
     }
-    
-
-//    @GetMapping("/*")
-//    public String Error() {
-//        return "error";
-//    }
-    
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+        @GetMapping("/*")
+    public String Error() {
+        return "error";
+    }
     
     
     

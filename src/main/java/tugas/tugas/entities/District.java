@@ -58,7 +58,7 @@ public class District implements Serializable {
     @JoinColumn(name = "provinceid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Province provinceid;
-//coba ya cak 
+
     public District() {
     }
 
