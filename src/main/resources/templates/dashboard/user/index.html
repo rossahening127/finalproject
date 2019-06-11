@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{dashboard/admin/layout}">
+    <!--<![endif]-->
+
+    <head>
+        <title>Dashboard</title>
+    </head>
+
+    <body>
+                
+
+         
+
+        <div layout:fragment="header">
+                            <h1>Dashboard</h1>
+        </div>
+        <ol layout:fragment="breadcrumb">
+            <li><a th:href="@{/user/dashboard}">Dashboard</a></li>
+<!--            <li><a href="#">Tables</a></li>
+            <li><a href="#">Employee</a></li>-->
+        </ol>
+        <div layout:fragment="content"><!-- start content -->
+            
+            <div class="animated fadeIn">
+                    <div class="row">
+        
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title" v-if="headerText">Selamat Datang, User!</strong>
+                                </div> 
+
+                                <div class="card-body">
+
+                                    <div class="col-md-12">
+                                                                                    <h6 class="pb-4 display-5">Random Tiny Heading H6</h6>
+                                        <div class="jumbotron">
+                                            Sistem informasi manajemen aset memiliki tujuan sebagai berikut:<br>
+                                            1. Membantu admin dalam memenuhi tujuan penyediaan pelayanan kepada peminjam secara efektif<br>
+                                            2. Membantu admin melakukan pemantauan dan pengelolaan aset secara efisien.
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div> <!--row-->
+                    </div><!--animate-->
+                </div>
+            
+        </div><!-- end content -->
+                               
+    </body>
+
+</html>

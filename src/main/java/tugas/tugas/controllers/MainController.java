@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import tugas.tugas.entities.Religion;
 import tugas.tugas.repositories.ReligionRepository;
 import tugas.tugas.services.ReligionService;
@@ -24,18 +26,20 @@ import tugas.tugas.services.ReligionService;
 public class MainController {
     
    
-    @GetMapping("/")
-    public String index() {
+    @RequestMapping(value = {"", "/", "/login"}, method = RequestMethod.GET)
+    public String login() {
         return "index";
     }
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
-    }
-        @GetMapping("/*")
+    
+        @GetMapping("/error")
     public String Error() {
         return "error";
     }
+    
+//     @GetMapping("/user")
+//    public String user() {
+//        return "";
+//    }
     
     
     

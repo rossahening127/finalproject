@@ -1,0 +1,103 @@
+<!doctype html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{dashboard/admin/layout}">
+    <!--<![endif]-->
+
+    <head>
+        <title>Employee</title>
+    </head>
+
+    <body>
+                
+
+         
+
+        <div layout:fragment="header">
+                            <h1>Employee</h1>
+        </div>
+        <ol layout:fragment="breadcrumb">
+            <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+            <li><a href="#">Tables</a></li>
+            <li><a href="@{/admin/employee}">Employee</a></li>
+        </ol>
+        <div layout:fragment="content"><!-- start content -->
+            <div class="animated fadeIn">
+                    <div class="row">
+        
+                        
+                         <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">Employee Table</strong>
+                                    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#addData" style="float: right;"><i class="fa fa-edit"></i>
+                                        Add Data</button>
+                                </div>
+                                <div class="card-body">
+                                    <table id="example" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Date of Birth</th>
+                                                <th>Hire Date</th>
+                                                <th>Password</th>
+                                                <th>Job ID</th>
+                                                <th>Job Title</th>
+                                                <th>Address ID</th>
+                                                <th>Address</th>
+                                                <th>Religion ID</th>
+                                                <th>Religion</th>
+                                                <th>Manager ID</th>
+                                                <th>Manager Name</th>
+                                                <th>Department ID</th>
+                                                <th>Department Name</th>
+
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="data:${dataEmp}">  
+                                                <!--            dataActor nama dari main controller, isian dataactor dari actor.java-->
+                                                <td id="id" th:text="${data.id}"></td>
+                                                <td id="fname" th:text="${data.firstname}"></td>
+                                                <td id="lname" th:text="${data.lastname}"></td>
+                                                <td id="email" th:text="${data.email}"></td>
+                                                <td id="dob" th:text="${data.dateofbirth}"></td>
+                                                <td id="hd" th:text="${data.hiredate}"></td>
+                                                <td id="pw" th:text="${data.password}"></td>
+                                                <td id="jobId" th:text="${data.jobId.id}"></td>
+                                                <td id="jobTitle" th:text="${data.jobId.jobtitle}"></td>
+                                                <td id="addId" th:text="${data.addressId.id}"></td>
+                                                <td id="addName" th:text="${data.addressId.name}"></td>
+                                                <td id="reliId" th:text="${data.religionId.id}"></td>
+                                                <td id="reliName" th:text="${data.religionId.name}"></td>
+                                                <td id="manId" th:text="${data.managerId.id}"></td>
+                                                <td id="manName" th:text="${data.managerId.firstname}"></td>
+                                                <td id="deptId" th:text="${data.departmentId.id}"></td>
+                                                <td id="deptName" th:text="${data.departmentId.name}"></td>
+
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#edit"><i class="fa fa-edit"></i>
+                                                        Edit</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#softdelete"><i class="fa fa-trash"></i>
+                                                        Delete</button>
+                                                </td>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div> <!--row-->
+                    </div><!--animate-->
+                </div>
+            
+        </div><!-- end content -->
+                               
+    </body>
+
+</html>

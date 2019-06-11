@@ -15,6 +15,7 @@ import tugas.tugas.entities.Address;
 import tugas.tugas.entities.Job;
 import tugas.tugas.repositories.AddressRepository;
 import tugas.tugas.repositories.JobRepository;
+import tugas.tugas.repositories.SubdistrictRepository;
 import tugas.tugas.services.AddressService;
 import tugas.tugas.services.JobService;
 
@@ -29,10 +30,14 @@ public class AddressController {
 
     @Autowired
     private AddressService addressService;
+    
+    @Autowired
+    private SubdistrictRepository subdistrictRepository;
 
     @GetMapping("/address")
     public String address(Model model) {
         model.addAttribute("dataAdd", addressRepository.getAll());
+         model.addAttribute("dataSub", subdistrictRepository.getAll());
         return "address";
     }
 

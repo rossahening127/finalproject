@@ -40,7 +40,7 @@ public class DistrictController { //cha udah di run belom
     @GetMapping("/district")
     public String district(Model model) {
         model.addAttribute("dataDis", districtRepository.getAll());
-//        model.addAttribute("dataPro", provinceRepository.findAll());
+        model.addAttribute("dataPro", provinceRepository.getAll());
         return "district";
     }
     

@@ -12,6 +12,9 @@
     <class>tugas.tugas.entities.AccessOfEmp</class>
     <class>tugas.tugas.entities.AccessEmp</class>
     <class>tugas.tugas.entities.Department</class>
+    <class>tugas.tugas.entities.Role</class>
+    <class>tugas.tugas.entities.Category</class>
+    <class>tugas.tugas.entities.AuthUser</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sim?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -1,0 +1,621 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+    <!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Employee table</title>
+        <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" th:href="@{/dist/img/apple-icon.png}">
+        <link rel="shortcut icon" th:href="@{/dist/img/favicon.ico}">
+
+
+
+        <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/themify-icons/css/themify-icons.css}">
+        <link rel="stylesheet" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/selectFX/css/cs-skin-elastic.css}">
+
+
+        <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+        <link rel="stylesheet" th:href="@{/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    </head>
+
+    <body>
+        <!-- Left Panel -->
+
+        <aside id="left-panel" class="left-panel">
+            <nav class="navbar navbar-expand-sm navbar-default">
+
+                <!--                <div class="navbar-header">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                                        <i class="fa fa-bars"></i>
+                                    </button>
+                                    <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
+                                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                                </div>-->
+
+                <div id="main-menu" class="main-menu collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a th:href="@{/dashboard}"> WELCOME TO SIM ASSET!</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/dashboard}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        </li>
+                        <h3 class="menu-title">MENU</h3><!-- /.menu-title -->
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon fa fa-archive"></i>Asset Data</a>
+                        </li>
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon fa fa-book"></i>Submission of Asset</a>
+                        </li>
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon fa fa-file-word-o"></i>Report</a>
+                        </li>
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon fa fa-cog"></i>Settings</a>
+                        </li>
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/religion}">Religion</a></li>
+                                <li><i class="fa fa-id-badge"></i><a th:href="@{/job}">Job</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/address}">Address</a></li>
+                                <li><i class="fa fa-share-square-o"></i><a th:href="@{/district}">District</a></li>
+                                <li><i class="fa fa-id-card-o"></i><a th:href="@{/employee}">Employee</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a th:href="@{/subdistrict}">Subdistrict</a></li>
+                                <li><i class="fa fa-spinner"></i><a th:href="@{/province}">Province</a></li>
+                                <li><i class="fa fa-fire"></i><a th:href="@{/accessemp}">Access</a></li>
+                                <li><i class="fa fa-book"></i><a th:href="@{/department}">Department</a></li>
+                                <li><i class="fa fa-th"></i><a th:href="@{/job}">Grids</a></li>
+                                <li><i class="fa fa-file-word-o"></i><a th:href="@{/job}">Typography</a></li>
+                            </ul>
+                        </li>
+
+
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </aside><!-- /#left-panel -->
+
+        <!-- Left Panel -->
+
+        <!-- Right Panel -->
+
+        <div id="right-panel" class="right-panel">
+
+            <!-- Header-->
+            <header id="header" class="header">
+
+                <div class="header-menu">
+
+                    <div class="col-sm-7">
+                        <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                        <div class="header-left">
+
+
+
+                            <div class="dropdown for-notification">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bell"></i>
+                                    <span class="count bg-danger">5</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="notification">
+                                    <p class="red">You have 3 Notification</p>
+                                    <a class="dropdown-item media bg-flat-color-1" href="#">
+                                        <i class="fa fa-check"></i>
+                                        <p>Server #1 overloaded.</p>
+                                    </a>
+                                    <a class="dropdown-item media bg-flat-color-4" href="#">
+                                        <i class="fa fa-info"></i>
+                                        <p>Server #2 overloaded.</p>
+                                    </a>
+                                    <a class="dropdown-item media bg-flat-color-5" href="#">
+                                        <i class="fa fa-warning"></i>
+                                        <p>Server #3 overloaded.</p>
+                                    </a>
+                                </div>
+                            </div> 
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="user-area dropdown float-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                            </a>
+
+                            <div class="user-menu dropdown-menu">
+                                <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+
+                                <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
+
+                                <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
+
+                                <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </header><!-- /header -->
+            <!-- Header-->
+
+            <div class="breadcrumbs">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Dashboard</a></li>
+                                <li><a href="#">Tables</a></li>
+                                <li class="active">Employee Table</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content mt-3">
+                <div class="animated fadeIn">
+                    <div class="row">
+
+                        <div class="col-md-50">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">Employee Table</strong>
+                                    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#addData" style="float: right;"><i class="fa fa-edit"></i>
+                                        Add Data</button>
+                                </div>
+                                <div class="card-body">
+                                    <table id="example" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Date of Birth</th>
+                                                <th>Hire Date</th>
+                                                <th>Password</th>
+                                                <th>Job ID</th>
+                                                <th>Job Title</th>
+                                                <th>Address ID</th>
+                                                <th>Address</th>
+                                                <th>Religion ID</th>
+                                                <th>Religion</th>
+                                                <th>Manager ID</th>
+                                                <th>Manager Name</th>
+                                                <th>Department ID</th>
+                                                <th>Department Name</th>
+
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="data:${dataEmp}">  
+                                                <!--            dataActor nama dari main controller, isian dataactor dari actor.java-->
+                                                <td id="id" th:text="${data.id}"></td>
+                                                <td id="fname" th:text="${data.firstname}"></td>
+                                                <td id="lname" th:text="${data.lastname}"></td>
+                                                <td id="email" th:text="${data.email}"></td>
+                                                <td id="dob" th:text="${data.dateofbirth}"></td>
+                                                <td id="hd" th:text="${data.hiredate}"></td>
+                                                <td id="pw" th:text="${data.password}"></td>
+                                                <td id="jobId" th:text="${data.jobId.id}"></td>
+                                                <td id="jobTitle" th:text="${data.jobId.jobtitle}"></td>
+                                                <td id="addId" th:text="${data.addressId.id}"></td>
+                                                <td id="addName" th:text="${data.addressId.name}"></td>
+                                                <td id="reliId" th:text="${data.religionId.id}"></td>
+                                                <td id="reliName" th:text="${data.religionId.name}"></td>
+                                                <td id="manId" th:text="${data.managerId.id}"></td>
+                                                <td id="manName" th:text="${data.managerId.firstname}"></td>
+                                                <td id="deptId" th:text="${data.departmentId.id}"></td>
+                                                <td id="deptName" th:text="${data.departmentId.name}"></td>
+
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#edit"><i class="fa fa-edit"></i>
+                                                        Edit</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#softdelete"><i class="fa fa-trash"></i>
+                                                        Delete</button>
+                                                </td>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div><!-- .animated -->
+            </div><!-- .content -->
+
+
+        </div><!-- /#right-panel -->
+
+        <!-- Right Panel -->
+
+        <!-- Modal -->
+
+        <div class="update-form">
+            <form th:action="@{/employee/update/id}" method="post">
+                <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Employee ID</label>
+                                    <input type="text" class="form-control" id="id_u" name="id" placeholder="Employee Identity" readonly>
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control" id="fname_u" name="firstname" placeholder="First Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lname_u" name="lastname" placeholder="Last Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Email</label>
+                                    <input type="text" class="form-control" id="email_u" name="email" placeholder="Employee Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Date of Birth </label>
+                                    <input type="date" class="form-control" id="dob_u" name="dateofbirth" placeholder="First Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Hire Date</label>
+                                    <input type="date" class="form-control" id="hd_u" name="hiredate" placeholder="Last Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Password</label>
+                                    <input type="text" class="form-control" id="pw_u" name="password" placeholder="Employee Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Job ID </label>
+                                    <input type="text" class="form-control" id="jid_u" name="jobId" placeholder="First Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Job Name</label>
+                                                                    <input type="text" class="form-control" id="jn_u" name="lastname" placeholder="Last Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Address ID</label>
+                                    <input type="text" class="form-control" id="aid_u" name="addressId" placeholder="Employee Identity">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Address</label>
+                                                                    <input type="text" class="form-control" id="an_u" name="firstname" placeholder="First Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Religion ID</label>
+                                    <input type="text" class="form-control" id="rid_u" name="religionId" placeholder="Last Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Religion</label>
+                                                                    <input type="text" class="form-control" id="rn_u" name="lastname" placeholder="Last Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">MAnager ID</label>
+                                    <input type="text" class="form-control" id="mid_u" name="managerId" placeholder="Last Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Manager Name</label>
+                                                                    <input type="text" class="form-control" id="mn_u" name="lastname" placeholder="Last Name">
+                                                                
+-->                                <div class="form-group required">
+                                    <label for="departmentId" class="col-form-label">Department</label>
+
+                                    <select type="text" name="departmentId" id="deptId" class="form-control" >
+                                        <option value="0">-CHOOSE-</option>
+                                        <option th:each="data:${dataDept}" th:value="${data.id}" th:text="${data.name}"></option>
+                                    </select>
+
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Department Name</label>
+                                                                    <input type="text" class="form-control" id="dn_u" name="departmentid" placeholder="Last Name">
+                                                                </div>-->
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="input-form">
+            <form th:action="@{/employee/addData}" method="post">
+                <div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!--                                <div class="form-group required">
+                                                                    <label for="id" class="col-form-label">Department ID</label>
+                                                                    <input type="text" class="form-control" id="id" name="id" placeholder="Department Identity">
+                                                                </div>
+                                                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Department Name</label>
+                                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Department Name">
+                                                                </div>
+                                                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Manager ID</label>
+                                                                    <input type="text" class="form-control" id="man" name="managerId" placeholder="Manager ID">
+                                                                    <select type="text" name="provinceid" id="id" class="form-control">
+                                                                        <option value="0">-PILIH-</option>
+                                                                        <option th:each="data:${dataPro}" th:value="${data:id}" th:text="${data.name}"></option>
+                                                                    </select>
+                                kok ha mau ya ca combonya
+                                provinceid kebacanya tetep null gmn dong wkwk
+                                                                </div>-->
+
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Employee ID</label>
+                                    <input type="text" class="form-control" id="id_i" name="id" placeholder="Employee Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control" id="fname_i" name="firstname" placeholder="First Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lname_i" name="lastname" placeholder="Last Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Email</label>
+                                    <input type="text" class="form-control" id="email_i" name="email" placeholder="Employee Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Date of Birth </label>
+                                    <input type="date" class="form-control" id="dob_i" name="dateofbirth" placeholder="First Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Hire Date</label>
+                                    <input type="date" class="form-control" id="hd_i" name="hiredate" placeholder="Last Name">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Password</label>
+                                    <input type="text" class="form-control" id="pw_i" name="password" placeholder="Employee Identity">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Job ID </label>
+                                    <input type="text" class="form-control" id="jid_i" name="jobId" placeholder="First Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Job Name</label>
+                                                                    <input type="text" class="form-control" id="jn_u" name="lastname" placeholder="Last Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="id" class="col-form-label">Address ID</label>
+                                    <input type="text" class="form-control" id="aid_i" name="addressId" placeholder="Employee Identity">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Address</label>
+                                                                    <input type="text" class="form-control" id="an_u" name="firstname" placeholder="First Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Religion ID</label>
+                                    <input type="text" class="form-control" id="rid_i" name="religionId" placeholder="Last Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Religion</label>
+                                                                    <input type="text" class="form-control" id="rn_u" name="lastname" placeholder="Last Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">MAnager ID</label>
+                                    <input type="text" class="form-control" id="mid_i" name="managerId" placeholder="Last Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Manager Name</label>
+                                                                    <input type="text" class="form-control" id="mn_u" name="lastname" placeholder="Last Name">
+                                                                </div>-->
+                                <div class="form-group required">
+                                    <label for="name" class="col-form-label">Department ID</label>
+                                    <input type="text" class="form-control" id="did_i" name="departmentId" placeholder="Last Name">
+                                </div>
+                                <!--                                <div class="form-group required">
+                                                                    <label for="name" class="col-form-label">Department Name</label>
+                                                                    <input type="text" class="form-control" id="dn_u" name="departmentid" placeholder="Last Name">
+                                                                </div>-->
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="delete-form">
+            <form th:action="@{/employee/softdelete/id}" method="get">
+                <div class="modal fade" id="softdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" class="form-control" id="id_d" name="id" placeholder="Department Identity" readonly>
+                                <input type="hidden" class="form-control" id="fname_d" name="firstname" placeholder="Department Name">
+                                <input type="hidden" class="form-control" id="lname_d" name="lastname" placeholder="District Name">
+                                <input type="hidden" class="form-control" id="email_d" name="email" placeholder="Department Name">
+                                <input type="hidden" class="form-control" id="dob_d" name="dateofbirth" placeholder="District Name">
+                                <input type="hidden" class="form-control" id="hd_d" name="hiredate" placeholder="Department Name">
+                                <input type="hidden" class="form-control" id="pw_d" name="password" placeholder="District Name">
+                                <input type="hidden" class="form-control" id="job_d" name="jobId" placeholder="Department Name">
+                                <input type="hidden" class="form-control" id="add_d" name="addressId" placeholder="District Name">
+                                <input type="hidden" class="form-control" id="reli_d" name="religionId" placeholder="District Name">
+                                <input type="hidden" class="form-control" id="man_d" name="managerId" placeholder="District Name">
+                                <input type="hidden" class="form-control" id="dept_d" name="departmentId" placeholder="District Name">
+                                <!--<input type="hidden" class="form-control" id="isDelete" value="true" name="isDelete" placeholder="Delete">-->
+                                AAre you sure you want to delete this data?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Delete" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+        <!--        <script th:src="@{/vendors/popper.js/dist/umd/popper.min.js}"></script>
+                <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>-->
+        <script th:src="@{/assets/js/main.js}"></script>
+
+
+        <script th:src="@{/vendors/datatables.net/js/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/vendors/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+        <script th:src="@{/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js}"></script>
+        <script th:src="@{/vendors/jszip/dist/jszip.min.js}"></script>
+        <script th:src="@{/vendors/pdfmake/build/pdfmake.min.js}"></script>
+        <script th:src="@{/vendors/pdfmake/build/vfs_fonts.js}"></script>
+        <script th:src="@{/vendors/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+        <script th:src="@{/vendors/datatables.net-buttons/js/buttons.print.min.js}"></script>
+        <script th:src="@{/vendors/datatables.net-buttons/js/buttons.colVis.min.js}"></script>
+        <script th:src="@{/assets/js/init-scripts/data-table/datatables-init.js}"></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <script th:src="@{/dist/js/popper.min.js}"></script>
+        <script th:src="@{/dist/js/bootstrap.min.js}"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $("#edit").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+
+                    var _empId = _row.find("#id").text(); //yg di tabel
+                    var _fName = _row.find("#fname").text();
+                    var _lName = _row.find("#lname").text();
+                    var _email = _row.find("#email").text();
+                    var _dob = _row.find("#dob").text();
+                    var _hd = _row.find("#hd").text();
+                    var _pw = _row.find("#pw").text();
+                    var _job = _row.find("#jobId").text();
+                    var _add = _row.find("#addId").text();
+                    var _reli = _row.find("#reliId").text();
+                    var _man = _row.find("#manId").text();
+                    var _dept = _row.find("#deptId").text();
+
+
+
+                    $(this).find("#id_u").val(_empId); //yg di modal, id
+                    $(this).find("#fname_u").val(_fName);
+                    $(this).find("#lname_u").val(_lName);
+                    $(this).find("#email_u").val(_email);
+                    $(this).find("#dob_u").val(_dob);
+                    $(this).find("#hd_u").val(_hd);
+                    $(this).find("#pw_u").val(_pw);
+                    $(this).find("#jid_u").val(_job);
+                    $(this).find("#aid_u").val(_add);
+                    $(this).find("#rid_u").val(_reli);
+                    $(this).find("#mid_u").val(_man);
+                    $(this).find("#deptId").val(_dept);
+
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#softdelete").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+
+                    var _empId = _row.find("#id").text(); //yg di tabel
+                    var _fName = _row.find("#fname").text();
+                    var _lName = _row.find("#lname").text();
+                    var _email = _row.find("#email").text();
+                    var _dob = _row.find("#dob").text();
+                    var _hd = _row.find("#hd").text();
+                    var _pw = _row.find("#pw").text();
+                    var _job = _row.find("#jobId").text();
+                    var _add = _row.find("#addId").text();
+                    var _reli = _row.find("#reliId").text();
+                    var _man = _row.find("#manId").text();
+                    var _dept = _row.find("#deptId").text();
+
+
+
+                    $(this).find("#id_d").val(_empId); //yg di modal, id
+                    $(this).find("#fname_d").val(_fName);
+                    $(this).find("#lname_d").val(_lName);
+                    $(this).find("#email_d").val(_email);
+                    $(this).find("#dob_d").val(_dob);
+                    $(this).find("#hd_d").val(_hd);
+                    $(this).find("#pw_d").val(_pw);
+                    $(this).find("#job_d").val(_job);
+                    $(this).find("#add_d").val(_add);
+                    $(this).find("#reli_d").val(_reli);
+                    $(this).find("#man_d").val(_man);
+                    $(this).find("#dept_d").val(_dept);
+
+
+
+                })
+            })
+        </script>
+
+    </body>
+
+</html>

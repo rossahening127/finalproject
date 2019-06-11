@@ -28,7 +28,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -65,16 +64,14 @@ public class Employee implements Serializable {
     private String lastname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-//    @NotNull
+    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
     @Column(name = "dateofbirth")
-    @DateTimeFormat (pattern = "YYYY-mm-dd")
     @Temporal(TemporalType.DATE)
     private Date dateofbirth;
     @Column(name = "hiredate")
-    @DateTimeFormat (pattern = "YYYY-mm-dd")
     @Temporal(TemporalType.DATE)
     private Date hiredate;
     @Size(max = 20)
@@ -85,6 +82,8 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
+    private List<AuthUser> authUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
     private List<AccessOfEmp> accessOfEmpList;
     @OneToMany(mappedBy = "managerId", fetch = FetchType.LAZY)
@@ -183,6 +182,15 @@ public class Employee implements Serializable {
 
     public void setIsdelete(String isdelete) {
         this.isdelete = isdelete;
+    }
+
+    @XmlTransient
+    public List<AuthUser> getAuthUserList() {
+        return authUserList;
+    }
+
+    public void setAuthUserList(List<AuthUser> authUserList) {
+        this.authUserList = authUserList;
     }
 
     @XmlTransient
