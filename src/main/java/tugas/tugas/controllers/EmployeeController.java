@@ -53,7 +53,7 @@ public class EmployeeController {
         model.addAttribute("dataReli", religionRepository.getAll());
         model.addAttribute("dataAdd", addressRepository.getAll());
         model.addAttribute("dataAdd", jobRepository.getAll());
-        return "dashboard/admin/employee";
+        return "dashboard/admin/employee_1";
     }
 
     @PostMapping("/employee/addData")

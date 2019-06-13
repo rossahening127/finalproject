@@ -97,9 +97,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll() //bintang 1 permit ALL
+                .antMatchers("/forgot-password/**").permitAll() //bintang 1 permit ALL
+                .antMatchers("/confirm-account/**").permitAll() 
+                .antMatchers("/confirm-reset/**").permitAll() 
+                .antMatchers("/reset-password/**").permitAll()
                 .antMatchers("/dist/**", "/assets/**","/images/**","/vendors/**").permitAll()                               //bintang 2 permit ALL must Login
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("USER")
+                .antMatchers("/deparment-head/**").hasAnyAuthority("department_head")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

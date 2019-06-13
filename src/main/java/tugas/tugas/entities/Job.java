@@ -36,6 +36,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Job.findByIsdelete", query = "SELECT j FROM Job j WHERE j.isdelete = :isdelete")})
 public class Job implements Serializable {
 
+    @Size(max = 30)
+    @Column(name = "jobtitle")
+    private String jobtitle;
+    @Basic(optional = false)
+//    @NotNull
+    @NotNull()
+    @Size(min = 1, max = 6)
+    @Column(name = "isdelete")
+    private String isdelete;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -43,14 +53,6 @@ public class Job implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-    @Size(max = 30)
-    @Column(name = "jobtitle")
-    private String jobtitle;
-    @Basic(optional = false)
-//    @NotNull
-    @Size(min = 1, max = 6)
-    @Column(name = "isdelete")
-    private String isdelete;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobId", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
 
@@ -74,21 +76,6 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public String getJobtitle() {
-        return jobtitle;
-    }
-
-    public void setJobtitle(String jobtitle) {
-        this.jobtitle = jobtitle;
-    }
-
-    public String getIsdelete() {
-        return isdelete;
-    }
-
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
-    }
 
     @XmlTransient
     public List<Employee> getEmployeeList() {
@@ -122,6 +109,22 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "tugas.tugas.entities.Job[ id=" + id + " ]";
+    }
+
+    public String getJobtitle() {
+        return jobtitle;
+    }
+
+    public void setJobtitle(String jobtitle) {
+        this.jobtitle = jobtitle;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
     }
     
 }

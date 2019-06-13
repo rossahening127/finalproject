@@ -37,6 +37,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Department.findByIsdelete", query = "SELECT d FROM Department d WHERE d.isdelete = :isdelete")})
 public class Department implements Serializable {
 
+    @Size(max = 50)
+    @Column(name = "name")
+    private String name;
+    @Basic(optional = false)
+//    @NotNull
+    @NotNull()
+    @Size(min = 1, max = 6)
+    @Column(name = "isdelete")
+    private String isdelete;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,14 +54,6 @@ public class Department implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-    @Size(max = 50)
-    @Column(name = "name")
-    private String name;
-    @Basic(optional = false)
-//    @NotNull
-    @Size(min = 1, max = 6)
-    @Column(name = "isdelete")
-    private String isdelete;
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee managerId;
@@ -78,21 +80,6 @@ public class Department implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIsdelete() {
-        return isdelete;
-    }
-
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
-    }
 
     public Employee getManagerId() {
         return managerId;
@@ -134,6 +121,22 @@ public class Department implements Serializable {
     @Override
     public String toString() {
         return "tugas.tugas.entities.Department[ id=" + id + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
     }
     
 }

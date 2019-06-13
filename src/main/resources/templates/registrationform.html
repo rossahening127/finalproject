@@ -1,0 +1,40 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"  
+  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Register</title>
+    </head>
+    <body>
+        <form action="#" th:action="@{/register}"  method="post">
+            <table>
+                <tr>
+                    <td><label for="id">Employee ID</label></td>
+                    <td><input  type="text" name="id" id="*{id}" ></input></td>
+                </tr>
+                <tr>
+                    <td><label for="firstName">First Name</label></td>
+                    <td><input  type="text" name="firstName" id="*{id}"></input></td>
+                </tr>
+                <tr>
+                    <td><label for="lastName">Last Name</label></td>
+                    <td><input  type="text" name="lastName" id="*{id}"></input></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input  type="text" name="email" id="*{id}"></input></td>
+                </tr>
+                <tr>
+                    <td><label for="dob">Date of Birth</label></td>
+                    <td><input  type="text" name="email" id="*{id}"></input></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input  type="password" name="password"></input></td>
+                </tr>
+                <tr>
+                    <td><input type="reset" value="Clear"/></td>
+                    <td><input type="submit" value="Submit"></input></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>  

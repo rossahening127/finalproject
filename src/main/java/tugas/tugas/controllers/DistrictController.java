@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tugas.tugas.entities.District;
 import tugas.tugas.repositories.DistrictRepository;
 import tugas.tugas.repositories.ProvinceRepository;
@@ -22,6 +23,7 @@ import tugas.tugas.services.DistrictService;
  * @author RossaHening
  */
 @Controller
+@RequestMapping("/admin")
 public class DistrictController { //cha udah di run belom
     @Autowired
     private DistrictRepository districtRepository;
@@ -41,7 +43,7 @@ public class DistrictController { //cha udah di run belom
     public String district(Model model) {
         model.addAttribute("dataDis", districtRepository.getAll());
         model.addAttribute("dataPro", provinceRepository.getAll());
-        return "district";
+        return "dashboard/admin/district_1";
     }
     
    

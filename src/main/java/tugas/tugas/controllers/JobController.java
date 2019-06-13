@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tugas.tugas.entities.Job;
 import tugas.tugas.entities.Religion;
 import tugas.tugas.repositories.JobRepository;
@@ -24,6 +25,7 @@ import tugas.tugas.services.ReligionService;
  * @author RossaHening
  */
 @Controller
+@RequestMapping("/admin")
 public class JobController {
 
     @Autowired
@@ -35,7 +37,7 @@ public class JobController {
     @GetMapping("/job")
     public String job(Model model) {
         model.addAttribute("dataJob", jobRepository.getAll());
-        return "job";
+        return "/dashboard/admin/job";
     }
 
     
