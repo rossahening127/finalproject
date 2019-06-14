@@ -8,7 +8,6 @@ package tugas.tugas.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,14 +28,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author RossaHening
  */
 @Entity
-@Table(name = "subdistrict")
+@Table(name = "supplier")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subdistrict.findAll", query = "SELECT s FROM Subdistrict s")
-    , @NamedQuery(name = "Subdistrict.findById", query = "SELECT s FROM Subdistrict s WHERE s.id = :id")
-    , @NamedQuery(name = "Subdistrict.findByName", query = "SELECT s FROM Subdistrict s WHERE s.name = :name")
-    , @NamedQuery(name = "Subdistrict.findByIsdelete", query = "SELECT s FROM Subdistrict s WHERE s.isdelete = :isdelete")})
-public class Subdistrict implements Serializable {
+    @NamedQuery(name = "Supplier.findAll", query = "SELECT s FROM Supplier s")
+    , @NamedQuery(name = "Supplier.findById", query = "SELECT s FROM Supplier s WHERE s.id = :id")
+    , @NamedQuery(name = "Supplier.findByName", query = "SELECT s FROM Supplier s WHERE s.name = :name")
+    , @NamedQuery(name = "Supplier.findByPhoneNumber", query = "SELECT s FROM Supplier s WHERE s.phoneNumber = :phoneNumber")
+    , @NamedQuery(name = "Supplier.findByIsDelete", query = "SELECT s FROM Supplier s WHERE s.isDelete = :isDelete")})
+public class Supplier implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,27 +48,30 @@ public class Subdistrict implements Serializable {
     @Size(max = 50)
     @Column(name = "name")
     private String name;
+    @Size(max = 15)
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
     @Basic(optional = false)
 //    @NotNull
     @Size(min = 1, max = 6)
-    @Column(name = "isdelete")
-    private String isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subdistrictid", fetch = FetchType.LAZY)
-    private List<Address> addressList;
-    @JoinColumn(name = "districtid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private District districtid;
+    @Column(name = "isDelete")
+    private String isDelete;
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Address addressId;
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY)
+    private List<Transaction> transactionList;
 
-    public Subdistrict() {
+    public Supplier() {
     }
 
-    public Subdistrict(String id) {
+    public Supplier(String id) {
         this.id = id;
     }
 
-    public Subdistrict(String id, String isdelete) {
+    public Supplier(String id, String isDelete) {
         this.id = id;
-        this.isdelete = isdelete;
+        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -87,29 +90,37 @@ public class Subdistrict implements Serializable {
         this.name = name;
     }
 
-    public String getIsdelete() {
-        return isdelete;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
     }
 
     @XmlTransient
-    public List<Address> getAddressList() {
-        return addressList;
+    public List<Transaction> getTransactionList() {
+        return transactionList;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
-    }
-
-    public District getDistrictid() {
-        return districtid;
-    }
-
-    public void setDistrictid(District districtid) {
-        this.districtid = districtid;
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
 
     @Override
@@ -122,10 +133,10 @@ public class Subdistrict implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subdistrict)) {
+        if (!(object instanceof Supplier)) {
             return false;
         }
-        Subdistrict other = (Subdistrict) object;
+        Supplier other = (Supplier) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -134,7 +145,7 @@ public class Subdistrict implements Serializable {
 
     @Override
     public String toString() {
-        return "tugas.tugas.entities.Subdistrict[ id=" + id + " ]";
+        return "tugas.tugas.entities.Supplier[ id=" + id + " ]";
     }
     
 }

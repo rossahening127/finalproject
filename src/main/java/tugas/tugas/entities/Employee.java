@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -48,6 +49,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByIsdelete", query = "SELECT e FROM Employee e WHERE e.isdelete = :isdelete")})
 public class Employee implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Size(max = 30)
     @Column(name = "firstname")
     private String firstname;
@@ -62,6 +69,14 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
+    @Column(name = "dateofbirth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateofbirth;
+    @Column(name = "hiredate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date hiredate;
     @Size(max = 80)
     @Column(name = "password")
     private String password;
@@ -70,27 +85,6 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
-    private List<ConfirmationToken> confirmationTokenList;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "dateofbirth")
-    @Temporal(TemporalType.DATE)
-    private Date dateofbirth;
-    @Column(name = "hiredate")
-    @Temporal(TemporalType.DATE)
-    private Date hiredate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
-    private List<AuthUser> authUserList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
-    private List<AccessOfEmp> accessOfEmpList;
-    @OneToMany(mappedBy = "managerId", fetch = FetchType.LAZY)
-    private List<Department> departmentList;
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Address addressId;
@@ -108,6 +102,14 @@ public class Employee implements Serializable {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Department departmentId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
+    private List<ConfirmationToken> confirmationTokenList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeid", fetch = FetchType.LAZY)
+    private List<AuthUser> authUserList;
+    @OneToMany(mappedBy = "employeeId", fetch = FetchType.LAZY)
+    private List<Submission> submissionList;
+    @OneToMany(mappedBy = "managerId", fetch = FetchType.LAZY)
+    private List<Department> departmentList;
 
     public Employee() {
     }
@@ -131,6 +133,29 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Date getDateofbirth() {
         return dateofbirth;
@@ -148,32 +173,20 @@ public class Employee implements Serializable {
         this.hiredate = hiredate;
     }
 
-
-    @XmlTransient
-    public List<AuthUser> getAuthUserList() {
-        return authUserList;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAuthUserList(List<AuthUser> authUserList) {
-        this.authUserList = authUserList;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @XmlTransient
-    public List<AccessOfEmp> getAccessOfEmpList() {
-        return accessOfEmpList;
+    public String getIsdelete() {
+        return isdelete;
     }
 
-    public void setAccessOfEmpList(List<AccessOfEmp> accessOfEmpList) {
-        this.accessOfEmpList = accessOfEmpList;
-    }
-
-    @XmlTransient
-    public List<Department> getDepartmentList() {
-        return departmentList;
-    }
-
-    public void setDepartmentList(List<Department> departmentList) {
-        this.departmentList = departmentList;
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
     }
 
     public Address getAddressId() {
@@ -225,6 +238,42 @@ public class Employee implements Serializable {
         this.departmentId = departmentId;
     }
 
+    @XmlTransient
+    public List<ConfirmationToken> getConfirmationTokenList() {
+        return confirmationTokenList;
+    }
+
+    public void setConfirmationTokenList(List<ConfirmationToken> confirmationTokenList) {
+        this.confirmationTokenList = confirmationTokenList;
+    }
+
+    @XmlTransient
+    public List<AuthUser> getAuthUserList() {
+        return authUserList;
+    }
+
+    public void setAuthUserList(List<AuthUser> authUserList) {
+        this.authUserList = authUserList;
+    }
+
+    @XmlTransient
+    public List<Submission> getSubmissionList() {
+        return submissionList;
+    }
+
+    public void setSubmissionList(List<Submission> submissionList) {
+        this.submissionList = submissionList;
+    }
+
+    @XmlTransient
+    public List<Department> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -248,55 +297,6 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "tugas.tugas.entities.Employee[ id=" + id + " ]";
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getIsdelete() {
-        return isdelete;
-    }
-
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
-    }
-
-    @XmlTransient
-    public List<ConfirmationToken> getConfirmationTokenList() {
-        return confirmationTokenList;
-    }
-
-    public void setConfirmationTokenList(List<ConfirmationToken> confirmationTokenList) {
-        this.confirmationTokenList = confirmationTokenList;
     }
     
 }

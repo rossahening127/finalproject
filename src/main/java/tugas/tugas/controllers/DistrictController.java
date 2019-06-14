@@ -43,7 +43,7 @@ public class DistrictController { //cha udah di run belom
     public String district(Model model) {
         model.addAttribute("dataDis", districtRepository.getAll());
         model.addAttribute("dataPro", provinceRepository.getAll());
-        return "dashboard/admin/district_1";
+        return "dashboard/admin/district";
     }
     
    
@@ -51,21 +51,21 @@ public class DistrictController { //cha udah di run belom
     public String addData(District district) {
         district.setIsdelete("false");
         districtRepository.save(district);
-        return "redirect:/district";
+        return "redirect:/admin/district";
     }
 
     @PostMapping("/district/update/{id}")
     public String updateData(@PathVariable("id") String id, District district) {
         district.setIsdelete("false");
         districtRepository.save(district);
-        return "redirect:/district";
+        return "redirect:/admin/district";
     }
 
     @GetMapping("/district/softdelete/{id}")
     public String softDelete(@PathVariable("id") String id, District district) {
         district.setIsdelete("true");
         districtRepository.save(district);
-        return "redirect:/district";
+        return "redirect:/admin/district";
     }
 
 }

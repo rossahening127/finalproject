@@ -157,7 +157,9 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>Dashboard</h1>
+                            <center>
+                                <span th:text="'A verification email has been sent to: ' + ${email}"></span>
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -183,85 +185,23 @@
                                 <div class="card-header">
                                     <strong>Add User</strong> Form
                                 </div>
+
                                 <div class="card-body card-block">
-                                    <form class="form-detail" action="#" th:action="@{/register}" th:object="${employee}" method="post">
-                                        <!--                    <h2>Add User Form</h2>
-                                                            <div class="form-row">
-                                                                <label for="username">Username</label>
-                                                                <input type="text" name="username" id="*{id}" class="input-text" placeholder="Username" required>
-                                                                <i class="fas fa-user"></i>
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <label for="email">Email</label>
-                                                                <input type="email" name="email" id="*{email}"class="input-text" placeholder="Email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
-                                                                <i class="fas fa-envelope"></i>
-                                                            </div>-->
-
-                                        <!--                    <div class="form-row">
-                                                                <label for="idEmployee">Employee</label>
-                                                                <select type="text" name="idEmployee" id="*{idEmployee}" class="form-control col-md-12" >
-                                                                    <option value="0">-PILIH-</option>
-                                                                    <option th:each="data:${employee}" th:value="${data.id}" th:text="${data.firstName}"></option>
-                                                                </select>
-                                                                <i class="fas fa-user"></i>
-                                                            </div>-->
-
-
-                                        <!--                    <div class="form-row-last">
-                                                                <input type="submit" name="register" class="register" value="Submit">
-                                                            </div>
-                                                        </form>-->
-
-                                        <!--                                    <form th:action="@{/register}" th:object="${employee} method="post" >--> 
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="id" class=" form-control-label">EmployeeID</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{id}" name="id" placeholder="Enter Employee ID..." class="form-control"><span class="help-block">Please enter Employee ID</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="firstname" class=" form-control-label">First Name</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{firstname}" name="firstname" placeholder="Enter First Name..." class="form-control"><span class="help-block">Please enter your first name</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="lastName" class=" form-control-label">Last Name</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{lastname}" name="lastname" placeholder="Enter Last Name..." class="form-control"><span class="help-block">Please enter your last name</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="email" class=" form-control-label">Email</label></div>
-                                            <div class="col-12 col-md-9"><input type="email" id="*{email}" name="email" placeholder="Enter Email..." class="form-control"><span class="help-block">Please enter your email</span></div>
-                                        </div>
+                                    <form class="form-detail" action="#" th:action="@{/addrole}"  method="post">
 
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="dateofbirth" class=" form-control-label">Date of Birth</label></div>
-                                            <div class="col-12 col-md-9"><input type="date" id="*{dateofbirth}" name="dateofbirth" placeholder="Enter Date of Birth..." class="form-control"><span class="help-block">Please enter your date of birth</span></div>
+                                            <div class="col col-md-3"><label for="id" class=" form-control-label">ID</label></div>
+                                            <div class="col-12 col-md-9"><input type="text" th:text="${id}" name="id" placeholder="Enter Employee ID..." class="form-control"><span class="help-block">Please enter Employee ID</span></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="hiredate" class=" form-control-label">Hire Date</label></div>
-                                            <div class="col-12 col-md-9"><input type="date" id="*{hiredate}" name="hiredate" placeholder="Enter Hire Date..." class="form-control"><span class="help-block">Please enter your email</span></div>
+                                            <div class="col col-md-3"><label for="employeeid" class=" form-control-label">employeeid</label></div>
+                                            <div class="col-12 col-md-9"><input type="text" th:text="${employeeid}"  name="employeeid" placeholder="Enter First Name..." class="form-control"readonly ><span class="help-block">Please enter your first name</span></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="password" class=" form-control-label">Password</label></div>
-                                            <div class="col-12 col-md-9"><input type="password" id="*{password}" name="password" placeholder="Enter Password..." class="form-control"><span class="help-block">Please enter your password</span></div>
+                                            <div class="col col-md-3"><label for="roleid" class=" form-control-label">ROLE ID</label></div>
+                                            <div class="col-12 col-md-9"><input type="text" id="roleid" name="roleid" placeholder="Enter Employee ID..." class="form-control"><span class="help-block">Please enter Employee ID</span></div>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="jobId" class=" form-control-label">Job ID</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{jobId}" name="jobId" placeholder="Enter Job ID..." class="form-control"><span class="help-block">Please enter your password</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="addressId" class=" form-control-label">Address ID</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{addressId}" name="addressId" placeholder="Enter Address..." class="form-control"><span class="help-block">Please enter your email</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="religionId" class=" form-control-label">Religion ID</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{religionId}" name="religionId" placeholder="Enter Religion..." class="form-control"><span class="help-block">Please enter your password</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="managerId" class=" form-control-label">Manager ID</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{managerId}" name="managerId" placeholder="Enter Manager ID..." class="form-control"><span class="help-block">Please enter your email</span></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="departmentId" class=" form-control-label">Department ID</label></div>
-                                            <div class="col-12 col-md-9"><input type="text" id="*{departmentId}" name="departmentId" placeholder="Enter Department ID..." class="form-control"><span class="help-block">Please enter your password</span></div>
-                                        </div>
+
                                         <div class="container-login100-form-btn">
                                             <input type="submit" class="btn btn-primary btn-sm"  value="Submit">
                                             <input type="reset" class="btn btn-danger btn-sm" value="Reset">
@@ -284,43 +224,13 @@
         <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
         <script th:src="@{/assets/js/main.js}"></script>
 
-        <!--<script th:src="@{/vendors/chart.js/dist/Chart.bundle.min.js}"></script>-->
-        <!--<script th:src="@{/assets/js/dashboard.js}"></script>-->
-        <!--<script th:src="@{/assets/js/widgets.js}"></script>-->
-        <!--        <script th:src="@{/vendors/jqvmap/dist/jquery.vmap.min.js}"></script>
-                <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
-                <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>-->
 
-        <!--        <script th:src="@{/vendors/jquery-validation/dist/jquery.validate.min.js}"></script>
-                <script th:src="@{/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js}"></script>-->
-
-        <!--         <script th:src="@{/vendors/pdfmake/build/pdfmake.min.js}"></script>
-                <script th:src="@{/vendors/pdfmake/build/vfs_fonts.js}"></script>-->
 
         <script th:src="@{/vendors/datatables.net/js/jquery.dataTables.min.js}"></script>
-        <!--        <script th:src="@{/vendors/datatables.net-buttons/js/buttons.html5.min.js}"></script>
-                <script th:src="@{/vendors/datatables.net-buttons/js/buttons.print.min.js}"></script>
-                <script th:src="@{/vendors/datatables.net-buttons/js/buttons.colVis.min.js}"></script>-->
+
         <script th:src="@{/assets/js/init-scripts/data-table/datatables-init.js}"></script>
 
-        <!--        <script>
-                    (function ($) {
-                        "use strict";
-        
-                        jQuery('#vmap').vectorMap({
-                            map: 'world_en',
-                            backgroundColor: null,
-                            color: '#ffffff',
-                            hoverOpacity: 0.7,
-                            selectedColor: '#1de9b6',
-                            enableZoom: true,
-                            showTooltip: true,
-                            values: sample_data,
-                            scaleColors: ['#1de9b6', '#03a9f5'],
-                            normalizeFunction: 'polynomial'
-                        });
-                    })(jQuery);
-                </script>-->
+
 
     </body>
 

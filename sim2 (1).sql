@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 13 Jun 2019 pada 10.21
+-- Generation Time: 14 Jun 2019 pada 10.05
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -17,40 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sim`
+-- Database: `sim2`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `access_emp`
---
-
-CREATE TABLE `access_emp` (
-  `id` varchar(10) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `isdelete` enum('false','true') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `access_emp`
---
-
-INSERT INTO `access_emp` (`id`, `name`, `isdelete`) VALUES
-('Po', 'Dont know ya', 'true');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `access_of_emp`
---
-
-CREATE TABLE `access_of_emp` (
-  `id` varchar(10) NOT NULL,
-  `employeeid` int(10) NOT NULL,
-  `accessid` varchar(10) NOT NULL,
-  `isdelete` enum('false','true') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -129,7 +97,8 @@ CREATE TABLE `asset` (
   `total` int(10) DEFAULT NULL,
   `location` varchar(50) DEFAULT NULL,
   `unitPrice` int(10) DEFAULT NULL,
-  `category_id` varchar(10) NOT NULL
+  `category_id` varchar(10) NOT NULL,
+  `isDelete` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -162,7 +131,8 @@ INSERT INTO `auth_user` (`id`, `employeeid`, `roleid`, `isdelete`, `lastupdate`)
 
 CREATE TABLE `category` (
   `id` varchar(10) NOT NULL,
-  `type` varchar(50) NOT NULL
+  `type` varchar(50) NOT NULL,
+  `isDelete` enum('false','true') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -187,7 +157,8 @@ INSERT INTO `confirmation_token` (`token_id`, `confirmation_token`, `created_dat
 (2, 'bd0260f3-e2f0-4545-b79f-8c570210cc89', '2019-06-13 01:43:40', 13),
 (3, 'a5848d84-6e6c-48c4-91df-be75029f83ff', '2019-06-13 08:28:29', 13),
 (4, '8fc6a8d4-6746-4388-860a-1fc09904591f', '2019-06-13 08:29:04', 13),
-(5, '68fd3c63-2eee-421a-a1b8-7ecfccc101ea', '2019-06-13 09:49:57', 13);
+(5, '68fd3c63-2eee-421a-a1b8-7ecfccc101ea', '2019-06-13 09:49:57', 13),
+(6, '83e273f2-a076-4293-ad36-25ed3c09935b', '2019-06-14 14:05:20', 17);
 
 -- --------------------------------------------------------
 
@@ -214,18 +185,6 @@ INSERT INTO `department` (`id`, `name`, `manager_id`, `isdelete`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_asset`
---
-
-CREATE TABLE `detail_asset` (
-  `id` varchar(10) NOT NULL,
-  `detailName` varchar(50) DEFAULT NULL,
-  `asset` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `district`
 --
 
@@ -241,14 +200,16 @@ CREATE TABLE `district` (
 --
 
 INSERT INTO `district` (`id`, `name`, `provinceid`, `isdelete`) VALUES
-('AA', 'Amanah', 'DKI', 'false'),
+('AA', 'Amanah', 'DKI', 'true'),
 ('Bantul', 'BA', 'DIY', 'true'),
 ('DD', 'Cobaa', 'DKI', 'true'),
 ('Jakbar', 'Jakarta Barat', 'DKI', 'false'),
 ('Jakpus', 'Jakarta Pusat', 'DKI', 'false'),
+('Jaksel', 'Jakarta Selatan', 'DKI', 'false'),
 ('Jaktim', 'Jakarta timur', 'DKI', 'false'),
 ('Jakut', 'Jakarta Utara', 'DKI', 'false'),
 ('KK', 'Kali Kuningan', 'DIY', 'true'),
+('KKa', 'Kali kalian', 'DIY', 'true'),
 ('KM', 'Kali Meraho', 'JTG', 'true'),
 ('KP', 'Kulon Progo', 'DIY', 'false'),
 ('Pekalongan', 'PKL', 'JTG', 'true'),
@@ -293,7 +254,8 @@ INSERT INTO `employee` (`id`, `firstname`, `lastname`, `email`, `dateofbirth`, `
 (13, 'Lalisa', 'Lee', 'rossa.hening.w@mail.ugm.ac.id', '1996-01-01', '1996-01-01', '$2a$10$zzZQGXhN7zCLbInI7XcUw.UJ94fGdVDDygyBTvNh3ADiyxjWL9dBC', 'Ac', 6, 'hi', 15, 'F', 'false'),
 (14, 'Rahmad', 'Bieber', 'senyawa0@gmail.com', '1996-10-12', '1996-01-01', 'goldencloset', 'IT', 4, 'is', 16, 'T', 'false'),
 (15, 'Uki', 'Maut', 'senyawa100@gmail.com', '1996-10-12', '1996-10-12', 'senyawauki', 'Ac', 5, 'is', 15, 'F', 'false'),
-(16, 'Rahmad', 'Subekti', 'senyawa100000@gmail.com', '1996-10-12', '2008-10-12', 'goldengoalooo', 'IT', 7, 'is', 16, 'T', 'false');
+(16, 'Rahmad', 'Subekti', 'senyawa100000@gmail.com', '1996-10-12', '2008-10-12', 'goldengoalooo', 'IT', 7, 'is', 16, 'T', 'false'),
+(17, 'Yupi', 'yey', 'senyawaaa@gmail.com', '1996-10-12', '1996-10-12', '$2a$10$xcExPPONMMC3dYLDNEDtq.paHAxG5mImBCliCdzKuHaQWAOE3QEcK', 'IT', 5, 'is', 16, 'T', 'true');
 
 -- --------------------------------------------------------
 
@@ -461,8 +423,11 @@ CREATE TABLE `submission` (
   `id` varchar(10) NOT NULL,
   `dateOfSubmission` date DEFAULT NULL,
   `typeOfAsset` varchar(50) DEFAULT NULL,
-  `tracking_id` varchar(10) DEFAULT NULL,
-  `employee_id` int(10) DEFAULT NULL
+  `employee_id` int(10) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `status` enum('pending','accepted','rejected','continued','discontinued') NOT NULL DEFAULT 'pending',
+  `fileOfSubmission` varchar(50) NOT NULL,
+  `isDelete` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -474,7 +439,8 @@ CREATE TABLE `submission` (
 CREATE TABLE `submission_of_asset` (
   `id` varchar(10) NOT NULL,
   `submission_id` varchar(10) NOT NULL,
-  `asset_id` varchar(10) NOT NULL
+  `asset_id` varchar(10) NOT NULL,
+  `isDelete` enum('false','true') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -487,7 +453,8 @@ CREATE TABLE `supplier` (
   `id` varchar(10) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `phoneNumber` varchar(15) DEFAULT NULL,
-  `address_id` int(5) DEFAULT NULL
+  `address_id` int(5) DEFAULT NULL,
+  `isDelete` enum('false','true') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -500,7 +467,9 @@ CREATE TABLE `tracking` (
   `id` varchar(10) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
-  `dateOfPocess` date DEFAULT NULL
+  `dateOfPocess` date DEFAULT NULL,
+  `isDelete` enum('false','true') NOT NULL DEFAULT 'false',
+  `submission_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -513,7 +482,8 @@ CREATE TABLE `transaction` (
   `id` varchar(10) NOT NULL,
   `dateTransaction` date DEFAULT NULL,
   `totalPrice` int(10) DEFAULT NULL,
-  `supplier` varchar(10) DEFAULT NULL
+  `supplier` varchar(10) DEFAULT NULL,
+  `isDelete` enum('false','true') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -528,7 +498,8 @@ CREATE TABLE `transaction_of_asset` (
   `subTotal` int(10) DEFAULT NULL,
   `unitPrice` int(10) DEFAULT NULL,
   `asset` varchar(10) NOT NULL,
-  `transaction` varchar(10) NOT NULL
+  `transaction` varchar(10) NOT NULL,
+  `isDelete` enum('false','true') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -552,20 +523,6 @@ INSERT INTO `user_role` (`ID`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `access_emp`
---
-ALTER TABLE `access_emp`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `access_of_emp`
---
-ALTER TABLE `access_of_emp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_aec_employee` (`employeeid`),
-  ADD KEY `fk_aoe_a` (`accessid`);
 
 --
 -- Indexes for table `address`
@@ -622,13 +579,6 @@ ALTER TABLE `confirmation_token`
 ALTER TABLE `department`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_department_managerid` (`manager_id`);
-
---
--- Indexes for table `detail_asset`
---
-ALTER TABLE `detail_asset`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_asset_fk` (`asset`);
 
 --
 -- Indexes for table `district`
@@ -693,7 +643,6 @@ ALTER TABLE `subdistrict`
 --
 ALTER TABLE `submission`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tracking_submission_fk` (`tracking_id`),
   ADD KEY `fk_submission_emp` (`employee_id`);
 
 --
@@ -750,12 +699,12 @@ ALTER TABLE `auth_user`
 -- AUTO_INCREMENT for table `confirmation_token`
 --
 ALTER TABLE `confirmation_token`
-  MODIFY `token_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `token_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `role`
 --
@@ -764,13 +713,6 @@ ALTER TABLE `role`
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
-
---
--- Ketidakleluasaan untuk tabel `access_of_emp`
---
-ALTER TABLE `access_of_emp`
-  ADD CONSTRAINT `fk_aec_employee` FOREIGN KEY (`employeeid`) REFERENCES `employee` (`id`),
-  ADD CONSTRAINT `fk_aoe_a` FOREIGN KEY (`accessid`) REFERENCES `access_emp` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `address`
@@ -804,12 +746,6 @@ ALTER TABLE `department`
   ADD CONSTRAINT `fk_department_managerid` FOREIGN KEY (`manager_id`) REFERENCES `employee` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `detail_asset`
---
-ALTER TABLE `detail_asset`
-  ADD CONSTRAINT `detail_asset_fk` FOREIGN KEY (`asset`) REFERENCES `asset` (`id`);
-
---
 -- Ketidakleluasaan untuk tabel `district`
 --
 ALTER TABLE `district`
@@ -835,8 +771,7 @@ ALTER TABLE `subdistrict`
 -- Ketidakleluasaan untuk tabel `submission`
 --
 ALTER TABLE `submission`
-  ADD CONSTRAINT `fk_submission_emp` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
-  ADD CONSTRAINT `tracking_submission_fk` FOREIGN KEY (`tracking_id`) REFERENCES `tracking` (`id`);
+  ADD CONSTRAINT `fk_submission_emp` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `submission_of_asset`

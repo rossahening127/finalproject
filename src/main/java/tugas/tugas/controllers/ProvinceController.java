@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tugas.tugas.entities.Job;
 import tugas.tugas.entities.Province;
 import tugas.tugas.entities.Religion;
@@ -26,6 +27,7 @@ import tugas.tugas.services.ReligionService;
  * @author RossaHening
  */
 @Controller
+@RequestMapping("admin")
 public class ProvinceController {
 
     @Autowired
@@ -37,7 +39,7 @@ public class ProvinceController {
     @GetMapping("/province")
     public String province(Model model) {
         model.addAttribute("dataPro", provinceRepository.getAll());
-        return "province";
+        return "dashboard/admin/province";
     }
 
     
@@ -45,7 +47,7 @@ public class ProvinceController {
     public String addData(Province province) {
         province.setIsdelete("false");
         provinceRepository.save(province);
-        return "redirect:/province";
+        return "redirect:dashboard/admin/province";
     }
 
     @PostMapping("/province/update/{id}")
@@ -53,14 +55,14 @@ public class ProvinceController {
         province.setIsdelete("false");
         provinceRepository.save(province);
 
-        return "redirect:/province";
+        return "redirect:dashboard/admin/province";
     }
 
     @GetMapping("/province/softdelete/{id}")
     public String softDelete(@PathVariable("id") String id, Province province) {
         province.setIsdelete("true");
         provinceRepository.save(province);
-        return "redirect:/province";
+        return "redirect:dashboard/admin/province";
     }
 
 }

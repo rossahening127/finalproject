@@ -45,7 +45,7 @@ public class JobController {
     public String addData(Job job) {
         job.setIsdelete("false");
         jobRepository.save(job);
-        return "redirect:/job";
+        return "redirect:dashboard/admin/job";
     }
 
     @PostMapping("/job/update/{id}")
@@ -53,14 +53,14 @@ public class JobController {
         job.setIsdelete("false");
         jobRepository.save(job);
 
-        return "redirect:/job";
+        return "redirect:dashboard/admin/job";
     }
 
     @GetMapping("/job/softdelete/{id}")
     public String softDelete(@PathVariable("id") String id, Job job) {
         job.setIsdelete("true");
         jobRepository.save(job);
-        return "redirect:/job";
+        return "redirect:dashboard/admin/job";
     }
 
 }

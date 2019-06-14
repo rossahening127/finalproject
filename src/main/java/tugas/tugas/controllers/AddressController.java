@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tugas.tugas.entities.Address;
 import tugas.tugas.entities.Job;
 import tugas.tugas.repositories.AddressRepository;
@@ -23,7 +24,9 @@ import tugas.tugas.services.JobService;
  *
  * @author RossaHening
  */
+
 @Controller
+@RequestMapping("/admin")
 public class AddressController {
      @Autowired
     private AddressRepository addressRepository;
@@ -38,7 +41,7 @@ public class AddressController {
     public String address(Model model) {
         model.addAttribute("dataAdd", addressRepository.getAll());
          model.addAttribute("dataSub", subdistrictRepository.getAll());
-        return "address";
+        return "dashboard/admin/address";
     }
 
     
@@ -46,7 +49,7 @@ public class AddressController {
     public String addData(Address address) {
         address.setIsdelete("false");
         addressRepository.save(address);
-        return "redirect:/address";
+        return "redirect:dashboard/admin/address";
     }
 
     @PostMapping("/address/update/{id}")
@@ -54,14 +57,14 @@ public class AddressController {
         address.setIsdelete("false");
         addressRepository.save(address);
 
-        return "redirect:/address";
+        return "redirect:dashboard/admin/address";
     }
 
     @GetMapping("/address/softdelete/{id}")
     public String softDelete(@PathVariable("id") String id, Address address) {
         address.setIsdelete("true");
         addressRepository.save(address);
-        return "redirect:/address";
+        return "redirect:dashboard/admin/address";
     }
 
 }

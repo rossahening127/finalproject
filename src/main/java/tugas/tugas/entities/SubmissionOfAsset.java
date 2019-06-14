@@ -6,34 +6,32 @@
 package tugas.tugas.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author RossaHening
  */
 @Entity
-@Table(name = "religion")
+@Table(name = "submission_of_asset")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Religion.findAll", query = "SELECT r FROM Religion r")
-    , @NamedQuery(name = "Religion.findById", query = "SELECT r FROM Religion r WHERE r.id = :id")
-    , @NamedQuery(name = "Religion.findByName", query = "SELECT r FROM Religion r WHERE r.name = :name")
-    , @NamedQuery(name = "Religion.findByIsdelete", query = "SELECT r FROM Religion r WHERE r.isdelete = :isdelete")})
-public class Religion implements Serializable {
+    @NamedQuery(name = "SubmissionOfAsset.findAll", query = "SELECT s FROM SubmissionOfAsset s")
+    , @NamedQuery(name = "SubmissionOfAsset.findById", query = "SELECT s FROM SubmissionOfAsset s WHERE s.id = :id")
+    , @NamedQuery(name = "SubmissionOfAsset.findByIsDelete", query = "SELECT s FROM SubmissionOfAsset s WHERE s.isDelete = :isDelete")})
+public class SubmissionOfAsset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,27 +40,28 @@ public class Religion implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-    @Size(max = 50)
-    @Column(name = "name")
-    private String name;
     @Basic(optional = false)
 //    @NotNull
     @Size(min = 1, max = 6)
-    @Column(name = "isdelete")
-    private String isdelete;
-    @OneToMany(mappedBy = "religionId", fetch = FetchType.LAZY)
-    private List<Employee> employeeList;
+    @Column(name = "isDelete")
+    private String isDelete;
+    @JoinColumn(name = "asset_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Asset assetId;
+    @JoinColumn(name = "submission_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Submission submissionId;
 
-    public Religion() {
+    public SubmissionOfAsset() {
     }
 
-    public Religion(String id) {
+    public SubmissionOfAsset(String id) {
         this.id = id;
     }
 
-    public Religion(String id, String isdelete) {
+    public SubmissionOfAsset(String id, String isDelete) {
         this.id = id;
-        this.isdelete = isdelete;
+        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -73,29 +72,28 @@ public class Religion implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
     }
 
-    public String getIsdelete() {
-        return isdelete;
+    public Asset getAssetId() {
+        return assetId;
     }
 
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
+    public void setAssetId(Asset assetId) {
+        this.assetId = assetId;
     }
 
-    @XmlTransient
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public Submission getSubmissionId() {
+        return submissionId;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setSubmissionId(Submission submissionId) {
+        this.submissionId = submissionId;
     }
 
     @Override
@@ -108,10 +106,10 @@ public class Religion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Religion)) {
+        if (!(object instanceof SubmissionOfAsset)) {
             return false;
         }
-        Religion other = (Religion) object;
+        SubmissionOfAsset other = (SubmissionOfAsset) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -120,7 +118,7 @@ public class Religion implements Serializable {
 
     @Override
     public String toString() {
-        return "tugas.tugas.entities.Religion[ id=" + id + " ]";
+        return "tugas.tugas.entities.SubmissionOfAsset[ id=" + id + " ]";
     }
     
 }

@@ -16,6 +16,16 @@
     <class>tugas.tugas.entities.Category</class>
     <class>tugas.tugas.entities.AuthUser</class>
     <class>tugas.tugas.entities.ConfirmationToken</class>
+    <class>tugas.tugas.entities.AppRole</class>
+    <class>tugas.tugas.entities.SubmissionOfAsset</class>
+    <class>tugas.tugas.entities.Transaction</class>
+    <class>tugas.tugas.entities.Asset</class>
+    <class>tugas.tugas.entities.Supplier</class>
+    <class>tugas.tugas.entities.Submission</class>
+    <class>tugas.tugas.entities.TransactionOfAsset</class>
+    <class>tugas.tugas.entities.Tracking</class>
+    <class>tugas.tugas.entities.PersistentLogins</class>
+    <class>tugas.tugas.entities.AppUser</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sim?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

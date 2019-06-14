@@ -62,18 +62,16 @@ public class ConfirmationToken implements Serializable {
         this.tokenId = tokenId;
     }
 
+    public Integer getTokenId() {
+        return tokenId;
+    }
+
     public ConfirmationToken(Employee employeeid) {
         this.employeeid = employeeid;
         createdDate = new Date();
         confirmationToken = UUID.randomUUID().toString();
     }
-
-       
     
-    public Integer getTokenId() {
-        return tokenId;
-    }
-
     public void setTokenId(Integer tokenId) {
         this.tokenId = tokenId;
     }
@@ -126,5 +124,5 @@ public class ConfirmationToken implements Serializable {
     public String toString() {
         return "tugas.tugas.entities.ConfirmationToken[ tokenId=" + tokenId + " ]";
     }
-
+    
 }

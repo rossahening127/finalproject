@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import tugas.tugas.entities.ConfirmationToken;
 import tugas.tugas.entities.Employee;
+import tugas.tugas.repositories.AddressRepository;
 import tugas.tugas.repositories.ConfirmationTokenRepository;
 import tugas.tugas.repositories.DepartmentRepository;
 import tugas.tugas.repositories.EmployeeRepository;
 import tugas.tugas.repositories.JobRepository;
+import tugas.tugas.repositories.ReligionRepository;
 import tugas.tugas.services.EmailSenderService;
 
 /**
@@ -38,6 +40,12 @@ public class UserAccountController {
 
     @Autowired
     private JobRepository jobRepository;
+    
+    @Autowired 
+    private ReligionRepository religionRepository;
+    
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private DepartmentRepository departmentRepository;
@@ -51,9 +59,11 @@ public class UserAccountController {
     public ModelAndView displayRegistration(ModelAndView modelAndView, Employee employee, Model model) {
         modelAndView.addObject("employee", employee);
         model.addAttribute("dataEmp", employeeRepository.getAll());
-        model.addAttribute("dataJob", jobRepository.findAll());
-        model.addAttribute("dataDept", departmentRepository.findAll());
-        modelAndView.setViewName("registrationform");
+        model.addAttribute("dataJob", jobRepository.getAll());
+        model.addAttribute("dataDept", departmentRepository.getAll());
+        model.addAttribute("dataReli", religionRepository.getAll());
+        model.addAttribute("dataAdd", addressRepository.getAll());
+        modelAndView.setViewName("registration");
         return modelAndView;
     }
 
@@ -103,7 +113,7 @@ public class UserAccountController {
             modelAndView.setViewName("resetpassword");
         } else {
             modelAndView.addObject("message", "The link is invalid or broken!");
-            modelAndView.setViewName("coba");
+            modelAndView.setViewName("error");
         }
         return modelAndView;
     }

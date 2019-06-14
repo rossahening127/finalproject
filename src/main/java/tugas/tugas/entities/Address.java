@@ -39,27 +39,27 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Address.findByIsdelete", query = "SELECT a FROM Address a WHERE a.isdelete = :isdelete")})
 public class Address implements Serializable {
 
-    @Size(max = 30)
-    @Column(name = "name")
-    private String name;
-    @Basic(optional = false)
-//    @NotNull
-    @NotNull()
-    @Size(min = 1, max = 6)
-    @Column(name = "isdelete")
-    private String isdelete;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Size(max = 30)
+    @Column(name = "name")
+    private String name;
+    @Basic(optional = false)
+//    @NotNull
+    @Size(min = 1, max = 6)
+    @Column(name = "isdelete")
+    private String isdelete;
     @JoinColumn(name = "subdistrictid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Subdistrict subdistrictid;
     @OneToMany(mappedBy = "addressId", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
+    @OneToMany(mappedBy = "addressId", fetch = FetchType.LAZY)
+    private List<Supplier> supplierList;
 
     public Address() {
     }
@@ -81,6 +81,21 @@ public class Address implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(String isdelete) {
+        this.isdelete = isdelete;
+    }
 
     public Subdistrict getSubdistrictid() {
         return subdistrictid;
@@ -97,6 +112,15 @@ public class Address implements Serializable {
 
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+
+    @XmlTransient
+    public List<Supplier> getSupplierList() {
+        return supplierList;
+    }
+
+    public void setSupplierList(List<Supplier> supplierList) {
+        this.supplierList = supplierList;
     }
 
     @Override
@@ -122,22 +146,6 @@ public class Address implements Serializable {
     @Override
     public String toString() {
         return "tugas.tugas.entities.Address[ id=" + id + " ]";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIsdelete() {
-        return isdelete;
-    }
-
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
     }
     
 }

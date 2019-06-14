@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tugas.tugas.entities.Religion;
 import tugas.tugas.repositories.ReligionRepository;
 import tugas.tugas.services.ReligionService;
@@ -21,6 +22,7 @@ import tugas.tugas.services.ReligionService;
  * @author RossaHening
  */
 @Controller
+@RequestMapping("admin")
 public class ReligionController {
 
     @Autowired
@@ -33,7 +35,7 @@ public class ReligionController {
     @GetMapping("/religion")
     public String religion(Model model) {
         model.addAttribute("dataReli", religionRepository.getAll());
-        return "religion";
+        return "dashboard/admin/religion";
     }
 
 //    @GetMapping("/dashboard")
@@ -47,7 +49,7 @@ public class ReligionController {
         religion.setIsdelete("false");
         religionRepository.save(religion);
 
-        return "redirect:/religion";
+        return "redirect:dashboard/admin/religion";
     }
 
     @PostMapping("/religion/update/{id}")
@@ -55,7 +57,7 @@ public class ReligionController {
         religion.setIsdelete("false");
         religionRepository.save(religion);
 
-        return "redirect:/religion";
+        return "redirect:dashboard/admin/religion";
     }
 
     @GetMapping("/religion/softdelete/{id}")
@@ -63,7 +65,7 @@ public class ReligionController {
         religion.setIsdelete("true");
 
         religionRepository.save(religion);
-        return "redirect:/religion";
+        return "redirect:dashboard/admin/religion";
     }
 
 }

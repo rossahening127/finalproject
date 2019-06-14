@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tugas.tugas.entities.Department;
 import tugas.tugas.repositories.DepartmentRepository;
 import tugas.tugas.services.DepartmentService;
@@ -20,6 +21,7 @@ import tugas.tugas.services.DepartmentService;
  * @author RossaHening
  */
 @Controller
+@RequestMapping("admin")
 public class DepartmentController {
     @Autowired
     private DepartmentRepository departmentRepository;
@@ -35,7 +37,7 @@ public class DepartmentController {
     @GetMapping("/department")
     public String district(Model model) {
         model.addAttribute("dataDept", departmentRepository.getAll());
-        return "department";
+        return "dashboard/admin/department";
     }
     
    
@@ -43,21 +45,21 @@ public class DepartmentController {
     public String addData(Department department) {
         department.setIsdelete("false");
         departmentRepository.save(department);
-        return "redirect:/department";
+        return "redirect:dashboard/admin/department";
     }
 
     @PostMapping("/department/update/{id}")
     public String updateData(@PathVariable("id") String id, Department department) {
         department.setIsdelete("false");
         departmentRepository.save(department);
-        return "redirect:/department";
+        return "redirect:dashboard/admin/department";
     }
 
     @GetMapping("/department/softdelete/{id}")
     public String softDelete(@PathVariable("id") String id, Department department) {
         department.setIsdelete("true");
         departmentRepository.save(department);
-        return "redirect:/department";
+        return "redirect:dashboard/admin/department";
     }
 
 }

@@ -13,8 +13,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,14 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author RossaHening
  */
 @Entity
-@Table(name = "subdistrict")
+@Table(name = "category")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subdistrict.findAll", query = "SELECT s FROM Subdistrict s")
-    , @NamedQuery(name = "Subdistrict.findById", query = "SELECT s FROM Subdistrict s WHERE s.id = :id")
-    , @NamedQuery(name = "Subdistrict.findByName", query = "SELECT s FROM Subdistrict s WHERE s.name = :name")
-    , @NamedQuery(name = "Subdistrict.findByIsdelete", query = "SELECT s FROM Subdistrict s WHERE s.isdelete = :isdelete")})
-public class Subdistrict implements Serializable {
+    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+    , @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id")
+    , @NamedQuery(name = "Category.findByType", query = "SELECT c FROM Category c WHERE c.type = :type")
+    , @NamedQuery(name = "Category.findByIsDelete", query = "SELECT c FROM Category c WHERE c.isDelete = :isDelete")})
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,30 +43,30 @@ public class Subdistrict implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-    @Size(max = 50)
-    @Column(name = "name")
-    private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "type")
+    private String type;
     @Basic(optional = false)
 //    @NotNull
     @Size(min = 1, max = 6)
-    @Column(name = "isdelete")
-    private String isdelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subdistrictid", fetch = FetchType.LAZY)
-    private List<Address> addressList;
-    @JoinColumn(name = "districtid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private District districtid;
+    @Column(name = "isDelete")
+    private String isDelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId", fetch = FetchType.LAZY)
+    private List<Asset> assetList;
 
-    public Subdistrict() {
+    public Category() {
     }
 
-    public Subdistrict(String id) {
+    public Category(String id) {
         this.id = id;
     }
 
-    public Subdistrict(String id, String isdelete) {
+    public Category(String id, String type, String isDelete) {
         this.id = id;
-        this.isdelete = isdelete;
+        this.type = type;
+        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -79,37 +77,29 @@ public class Subdistrict implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getIsdelete() {
-        return isdelete;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(String isdelete) {
-        this.isdelete = isdelete;
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
     }
 
     @XmlTransient
-    public List<Address> getAddressList() {
-        return addressList;
+    public List<Asset> getAssetList() {
+        return assetList;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
-    }
-
-    public District getDistrictid() {
-        return districtid;
-    }
-
-    public void setDistrictid(District districtid) {
-        this.districtid = districtid;
+    public void setAssetList(List<Asset> assetList) {
+        this.assetList = assetList;
     }
 
     @Override
@@ -122,10 +112,10 @@ public class Subdistrict implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subdistrict)) {
+        if (!(object instanceof Category)) {
             return false;
         }
-        Subdistrict other = (Subdistrict) object;
+        Category other = (Category) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -134,7 +124,7 @@ public class Subdistrict implements Serializable {
 
     @Override
     public String toString() {
-        return "tugas.tugas.entities.Subdistrict[ id=" + id + " ]";
+        return "tugas.tugas.entities.Category[ id=" + id + " ]";
     }
     
 }

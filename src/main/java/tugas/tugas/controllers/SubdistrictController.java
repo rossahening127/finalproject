@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import tugas.tugas.entities.Subdistrict;
 
@@ -23,6 +24,7 @@ import tugas.tugas.services.SubdistrictService;
  * @author RossaHening
  */
 @Controller
+@RequestMapping("admin")
 public class SubdistrictController {
 
     @Autowired
@@ -34,14 +36,14 @@ public class SubdistrictController {
     @GetMapping("/subdistrict")
     public String subdistrict(Model model) {
         model.addAttribute("dataSub", subdistrictRepository.getAll());
-        return "subdistrict";
+        return "dashboard/admin/subdistrict";
     }
 
     @PostMapping("/subdistrict/addData")
     public String addData(Subdistrict subdistrict) {
         subdistrict.setIsdelete("false");
         subdistrictRepository.save(subdistrict);
-        return "redirect:/subdistrict";
+        return "redirect:dashboard/admin/subdistrict";
     }
 
     @PostMapping("/subdistrict/update/{id}")
@@ -49,14 +51,14 @@ public class SubdistrictController {
         subdistrict.setIsdelete("false");
         subdistrictRepository.save(subdistrict);
 
-        return "redirect:/subdistrict";
+        return "redirect:dashboard/admin/subdistrict";
     }
 
     @GetMapping("/subdistrict/softdelete/{id}")
     public String softDelete(@PathVariable("id") String id, Subdistrict subdistrict) {
         subdistrict.setIsdelete("true");
         subdistrictRepository.save(subdistrict);
-        return "redirect:/subdistrict";
+        return "redirect:dashboard/admin/subdistrict";
     }
 
 }

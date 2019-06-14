@@ -46,7 +46,7 @@ public class AuthUser implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-//    @NotNull
+    @NotNull
     @Size(min = 1, max = 6)
     @Column(name = "isdelete")
     private String isdelete;

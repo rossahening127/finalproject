@@ -71,17 +71,17 @@
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/religion}">Religion</a></li>
-                                <li><i class="fa fa-id-badge"></i><a th:href="@{/job}">Job</a></li>
-                                <li><i class="fa fa-bars"></i><a th:href="@{/address}">Address</a></li>
-                                <li><i class="fa fa-share-square-o"></i><a th:href="@{/district}">District</a></li>
-                                <li><i class="fa fa-id-card-o"></i><a th:href="@{/employee}">Employee</a></li>
-                                <li><i class="fa fa-exclamation-triangle"></i><a th:href="@{/subdistrict}">Subdistrict</a></li>
-                                <li><i class="fa fa-spinner"></i><a th:href="@{/province}">Province</a></li>
-                                <li><i class="fa fa-fire"></i><a th:href="@{/accessemp}">Access</a></li>
-                                <li><i class="fa fa-book"></i><a th:href="@{/department}">Department</a></li>
-                                <li><i class="fa fa-th"></i><a th:href="@{/job}">Grids</a></li>
-                                <li><i class="fa fa-file-word-o"></i><a th:href="@{/job}">Typography</a></li>
+                                 <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/admin/religion}">Religion</a></li>
+                                <li><i class="fa fa-id-badge"></i><a th:href="@{/admin/job}">Job</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/admin/address}">Address</a></li>
+                                <li><i class="fa fa-share-square-o"></i><a th:href="@{/admin/district}">District</a></li>
+                                <li><i class="fa fa-id-card-o"></i><a th:href="@{/admin/employee}">Employee</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a th:href="@{/admin/subdistrict}">Subdistrict</a></li>
+                                <li><i class="fa fa-spinner"></i><a th:href="@{/admin/province}">Province</a></li>
+                                <li><i class="fa fa-fire"></i><a th:href="@{/admin/accessemp}">Access</a></li>
+                                <li><i class="fa fa-book"></i><a th:href="@{/admin/department}">Department</a></li>
+                                <li><i class="fa fa-th"></i><a th:href="@{/admin/job}">Grids</a></li>
+                                <li><i class="fa fa-file-word-o"></i><a th:href="@{/admin/job}">Typography</a></li>
                             </ul>
                         </li>
 
@@ -148,7 +148,7 @@
 
                                 <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                                <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                <a class="nav-link" th:href="@{/logout}"><i class="fa fa-power-off"></i> Logout</a>
                             </div>
                         </div>
 
@@ -240,7 +240,7 @@
         <!-- Modal -->
 
         <div class="update-form">
-            <form th:action="@{/district/update/id}" method="post">
+            <form th:action="@{/admin/district/update/id}" method="post">
                 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -284,7 +284,7 @@
         </div>
 
         <div class="input-form">
-            <form th:action="@{/district/addData}" method="post">
+            <form th:action="@{/admin/district/addData}" method="post">
                 <div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -338,7 +338,7 @@
         </div>
 
         <div class="delete-form">
-            <form th:action="@{/district/softdelete/id}" method="get">
+            <form th:action="@{/admin/district/softdelete/id}" method="get">
                 <div class="modal fade" id="softdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
